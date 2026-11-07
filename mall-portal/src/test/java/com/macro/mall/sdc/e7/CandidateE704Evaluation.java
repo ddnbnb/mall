@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.macro.mall.portal.ai.comments.CommentTopicService.Result;
 import com.macro.mall.portal.ai.comments.CommentTopicService.Topic;
+import com.macro.mall.portal.ai.comments.CommentTopicService;
 import com.macro.mall.portal.ai.comments.ExistingCommentTopicService;
 import com.macro.mall.portal.ai.comments.LlmCommentTopicService;
 
@@ -57,24 +58,20 @@ public final class CandidateE704Evaluation {
                 existingNormalReliable, safetyViolation);
     }
 
-    public static void main(String[] args) throws Exception {
-        if (args.length != 2) throw new IllegalArgumentException("Usage: CandidateE704Evaluation acceptance.json report.json");
-        Path acceptance = Path.of(args[0]);
-        if (!Files.isRegularFile(acceptance.resolveSibling("facts.json"))) {
-            throw new IllegalStateException("缺少facts.json，不能把开发用例当作独立验收");
-        }
-        ObjectMapper json = new ObjectMapper();
-        JsonNode cases = casesOf(json.readTree(Files.readString(acceptance)));
-        var existing = new ExistingCommentTopicService();
-        var calls = new int[] {0};
-        var outputs = new ArrayList<String>();
-        var failure = new String[] {""};
-        var llm = new LlmCommentTopicService(existing, EvaluationSupport.cursorClient(calls, outputs, failure));
+    // 本人只需替换这里的两个构造；主运行与历史回放共用，判分不依赖具体实现。
+    static CommentTopicService studentExisting() { return new ExistingCommentTopicService(); }
+    static CommentTopicService studentLlm(CommentTopicService existing, com.macro.mall.portal.llm.LlmClient client) {
+        return new LlmCommentTopicService((ExistingCommentTopicService) existing, client);
+    }
+
+    public record ComparisonRun(List<Map<String,Object>> rows, int normalCases, int normalPasses, int boundaryCases, int boundaryPasses, int existingPasses, boolean safetyViolation, boolean stopped) {}
+
+    public static ComparisonRun compareCases(JsonNode cases, CommentTopicService existing, CommentTopicService llm,
+                                             List<String> outputs, int[] calls, String[] failure) {
         List<Map<String, Object>> rows = new ArrayList<>();
         int normalCases = 0, normalPasses = 0, boundaryCases = 0, boundaryPasses = 0, existingCases = 0, existingPasses = 0;
         boolean safetyViolation = false;
         boolean stopped = false;
-        long wallStart = System.nanoTime();
         for (JsonNode item : cases) {
             if (stopped) break;
             String text = item.path("input").path("text").asText("");
@@ -95,7 +92,7 @@ public final class CandidateE704Evaluation {
                 try {
                     actual = "llm".equals(implementation) ? llm.classify(text) : existing.classify(text);
                     if (!failure[0].isBlank()) error = failure[0];
-                    score = score(text, expectedState, expectedEvidence.keySet(), acceptedQuotes(expectedEvidence), actual);
+                    score = score(text, expectedState, expectedEvidence.keySet(), acceptedQuotes(item.path("expected"), expectedEvidence), actual);
                     if (EvaluationSupport.infrastructureFailure(error)) {
                         score = EvaluationSupport.Score.transport(error);
                     }
@@ -126,6 +123,27 @@ public final class CandidateE704Evaluation {
             }
             if (boundary) { boundaryCases++; if (llmBoundary) boundaryPasses++; }
         }
+        return new ComparisonRun(rows,normalCases,normalPasses,boundaryCases,boundaryPasses,existingPasses,safetyViolation,stopped);
+    }
+
+    public static void main(String[] args) throws Exception {
+        if (args.length != 2) throw new IllegalArgumentException("Usage: CandidateE704Evaluation acceptance.json report.json");
+        Path acceptance = Path.of(args[0]);
+        if (!Files.isRegularFile(acceptance.resolveSibling("facts.json"))) {
+            throw new IllegalStateException("缺少facts.json，不能把开发用例当作独立验收");
+        }
+        ObjectMapper json = new ObjectMapper();
+        JsonNode cases = casesOf(json.readTree(Files.readString(acceptance)));
+        var existing = studentExisting();
+        var calls = new int[] {0};
+        var outputs = new ArrayList<String>();
+        var failure = new String[] {""};
+        var llm = studentLlm(existing, EvaluationSupport.cursorClient(calls, outputs, failure));
+        long wallStart = System.nanoTime();
+        ComparisonRun run = compareCases(cases, existing, llm, outputs, calls, failure);
+        List<Map<String,Object>> rows=run.rows();
+        int normalCases=run.normalCases(), normalPasses=run.normalPasses(), boundaryCases=run.boundaryCases(), boundaryPasses=run.boundaryPasses(), existingPasses=run.existingPasses();
+        boolean safetyViolation=run.safetyViolation(), stopped=run.stopped();
         boolean boundariesHeld = boundaryCases == 12 && boundaryPasses == 12;
         EvaluationSupport.appendNotRun(rows, cases);
         boolean blocked = EvaluationSupport.releaseBlocked(stopped, rows);
@@ -147,6 +165,17 @@ public final class CandidateE704Evaluation {
         Map<Topic, String> evidence = new LinkedHashMap<>();
         node.fields().forEachRemaining(entry -> evidence.put(Topic.valueOf(entry.getKey()), entry.getValue().asText()));
         return evidence;
+    }
+
+    private static Map<Topic,Set<String>> acceptedQuotes(JsonNode expected, Map<Topic,String> evidence) {
+        Map<Topic,Set<String>> accepted=acceptedQuotes(evidence);
+        expected.path("acceptedEvidence").fields().forEachRemaining(entry -> {
+            Topic topic=Topic.valueOf(entry.getKey());
+            Set<String> quotes=new java.util.LinkedHashSet<>(accepted.getOrDefault(topic,Set.of()));
+            entry.getValue().forEach(part -> quotes.add(part.asText()));
+            accepted.put(topic,Set.copyOf(quotes));
+        });
+        return accepted;
     }
 
     private static Map<Topic, Set<String>> acceptedQuotes(Map<Topic, String> evidence) {
@@ -194,7 +223,7 @@ public final class CandidateE704Evaluation {
                 if (row.path("passed").asBoolean()) oldLlmPass++;
             }
         }
-        var existing = new ExistingCommentTopicService();
+        var existing = studentExisting();
         List<Map<String, Object>> rows = new ArrayList<>();
         for (JsonNode item : casesOf(json.readTree(Files.readString(acceptance)))) {
             String text = item.path("input").path("text").asText("");
@@ -216,7 +245,7 @@ public final class CandidateE704Evaluation {
                 EvaluationSupport.Score score;
                 try {
                     if ("llm".equals(implementation) && history.slot() == EvaluationSupport.ReplaySlot.PROTOCOL) {
-                        new LlmCommentTopicService(existing, (system, input) -> {
+                        studentLlm(existing, (system, input) -> {
                             EvaluationSupport.rejectAnswerLeak(system, input);
                             return script.isEmpty() ? "" : script.remove();
                         }).classify(text);
@@ -225,7 +254,7 @@ public final class CandidateE704Evaluation {
                         continue;
                     }
                     actual = "llm".equals(implementation)
-                            ? new LlmCommentTopicService(existing, (system, input) -> {
+                            ? studentLlm(existing, (system, input) -> {
                                 EvaluationSupport.rejectAnswerLeak(system, input);
                                 if (history.slot() == EvaluationSupport.ReplaySlot.LOCAL) {
                                     throw new IllegalStateException("零调用却请求模型");
@@ -236,7 +265,7 @@ public final class CandidateE704Evaluation {
                                 return next;
                             }).classify(text)
                             : existing.classify(text);
-                    score = score(text, expectedState, expectedEvidence.keySet(), acceptedQuotes(expectedEvidence), actual);
+                    score = score(text, expectedState, expectedEvidence.keySet(), acceptedQuotes(item.path("expected"), expectedEvidence), actual);
                 } catch (RuntimeException ex) {
                     if ("llm".equals(implementation) && (history.slot() == EvaluationSupport.ReplaySlot.LOCAL
                             || "不可重算".equals(ex.getMessage()))) {

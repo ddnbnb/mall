@@ -119,4 +119,30 @@ class CandidateE704EvaluationTest {
         assertFalse(absent.path("scored").asBoolean());
         EvaluationFiles.assertTallyAddsUp(replay.path("tally"));
     }
+    @org.junit.jupiter.api.Test
+    void acceptsIndependentCommentInterfaces() throws Exception {
+        com.macro.mall.portal.ai.comments.CommentTopicService a = text ->
+          new com.macro.mall.portal.ai.comments.CommentTopicService.Result(
+            com.macro.mall.portal.ai.comments.CommentTopicService.State.NEEDS_INPUT,Map.of());
+        var cases=new ObjectMapper().readTree("""
+          [{"id":"n","kind":"normal","input":{"text":""},"expected":{"state":"NEEDS_INPUT","evidence":{}}}]
+          """);
+        var run=CandidateE704Evaluation.compareCases(cases,a,a,new java.util.ArrayList<>(),new int[]{0},new String[]{""});
+        assertEquals(2,run.rows().size());
+        assertTrue(run.rows().stream().allMatch(row -> Boolean.TRUE.equals(row.get("passed"))));
+    }
+    @org.junit.jupiter.api.Test
+    void publicOfflineRegressionRecordsRealOrdinaryResults() throws Exception {
+        var json=new ObjectMapper();
+        var cases=json.readTree(Files.readString(EvaluationFiles.task("E7-04").resolve("acceptance.json"))).path("cases");
+        com.macro.mall.portal.ai.comments.CommentTopicService unavailable = request -> new com.macro.mall.portal.ai.comments.CommentTopicService.Result(com.macro.mall.portal.ai.comments.CommentTopicService.State.UNAVAILABLE,Map.of());
+        var run=CandidateE704Evaluation.compareCases(cases,CandidateE704Evaluation.studentExisting(),unavailable,
+            new java.util.ArrayList<>(),new int[]{0},new String[]{""});
+        org.junit.jupiter.api.Assertions.assertEquals(64,run.rows().size());
+        Path report=Path.of("target","e7-04-public-offline.json");
+        Files.createDirectories(report.getParent());
+        json.writerWithDefaultPrettyPrinter().writeValue(report.toFile(),Map.of("evidenceType","public offline ordinary regression; model unavailable, not quality evidence",
+            "modelCalls",0,"decision","未完成","humanReview","未进行独立人工核对","results",run.rows()));
+    }
+
 }

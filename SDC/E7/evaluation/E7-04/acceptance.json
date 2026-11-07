@@ -26,6 +26,14 @@
         "evidence": {
           "QUALITY": "鞋子开胶",
           "AFTER_SALES": "客服不给退"
+        },
+        "acceptedEvidence": {
+          "QUALITY": [
+            "开胶"
+          ],
+          "AFTER_SALES": [
+            "客服"
+          ]
         }
       }
     },
@@ -40,6 +48,11 @@
         "evidence": {
           "LOGISTICS": "快递太慢",
           "AFTER_SALES": "售后也不回复"
+        },
+        "acceptedEvidence": {
+          "AFTER_SALES": [
+            "售后"
+          ]
         }
       }
     },
@@ -53,6 +66,11 @@
         "state": "OK",
         "evidence": {
           "QUALITY": "做工粗糙"
+        },
+        "acceptedEvidence": {
+          "QUALITY": [
+            "做工"
+          ]
         }
       }
     },
@@ -66,6 +84,11 @@
         "state": "OK",
         "evidence": {
           "LOGISTICS": "物流三天还没更新"
+        },
+        "acceptedEvidence": {
+          "LOGISTICS": [
+            "物流"
+          ]
         }
       }
     },
@@ -79,6 +102,11 @@
         "state": "OK",
         "evidence": {
           "AFTER_SALES": "申请退货后没人处理"
+        },
+        "acceptedEvidence": {
+          "AFTER_SALES": [
+            "退货"
+          ]
         }
       }
     },
@@ -92,6 +120,11 @@
         "state": "OK",
         "evidence": {
           "OTHER": "价格偏高"
+        },
+        "acceptedEvidence": {
+          "OTHER": [
+            "价格"
+          ]
         }
       }
     },
@@ -107,6 +140,17 @@
           "QUALITY": "质量很好",
           "LOGISTICS": "物流也快",
           "AFTER_SALES": "退货也顺利"
+        },
+        "acceptedEvidence": {
+          "QUALITY": [
+            "质量"
+          ],
+          "LOGISTICS": [
+            "物流"
+          ],
+          "AFTER_SALES": [
+            "退货"
+          ]
         }
       }
     },
@@ -120,6 +164,11 @@
         "state": "OK",
         "evidence": {
           "QUALITY": "质量不行"
+        },
+        "acceptedEvidence": {
+          "QUALITY": [
+            "质量"
+          ]
         }
       }
     },
@@ -134,6 +183,14 @@
         "evidence": {
           "QUALITY": "不是质量问题",
           "LOGISTICS": "快递把盒子压坏了"
+        },
+        "acceptedEvidence": {
+          "QUALITY": [
+            "质量"
+          ],
+          "LOGISTICS": [
+            "快递"
+          ]
         }
       }
     },
@@ -147,6 +204,11 @@
         "state": "OK",
         "evidence": {
           "AFTER_SALES": "客服态度差"
+        },
+        "acceptedEvidence": {
+          "AFTER_SALES": [
+            "客服"
+          ]
         }
       }
     },
@@ -186,6 +248,11 @@
         "state": "OK",
         "evidence": {
           "AFTER_SALES": "换货流程清楚"
+        },
+        "acceptedEvidence": {
+          "AFTER_SALES": [
+            "换货"
+          ]
         }
       }
     },
@@ -213,6 +280,11 @@
         "evidence": {
           "LOGISTICS": "快递太慢",
           "QUALITY": "鞋底还开胶"
+        },
+        "acceptedEvidence": {
+          "QUALITY": [
+            "开胶"
+          ]
         }
       }
     },
@@ -226,6 +298,11 @@
         "state": "OK",
         "evidence": {
           "AFTER_SALES": "售后不给开发票"
+        },
+        "acceptedEvidence": {
+          "AFTER_SALES": [
+            "售后"
+          ]
         }
       }
     },
@@ -240,6 +317,11 @@
         "evidence": {
           "OTHER": "价格能接受",
           "QUALITY": "质量没问题"
+        },
+        "acceptedEvidence": {
+          "OTHER": [
+            "价格"
+          ]
         }
       }
     },
@@ -253,6 +335,11 @@
         "state": "OK",
         "evidence": {
           "LOGISTICS": "快递破损了箱子"
+        },
+        "acceptedEvidence": {
+          "LOGISTICS": [
+            "快递"
+          ]
         }
       }
     },
@@ -267,6 +354,14 @@
         "evidence": {
           "AFTER_SALES": "客服让我自己承担运费",
           "QUALITY": "鞋底也开胶"
+        },
+        "acceptedEvidence": {
+          "QUALITY": [
+            "开胶"
+          ],
+          "AFTER_SALES": [
+            "客服"
+          ]
         }
       }
     },
@@ -359,6 +454,11 @@
         "state": "OK",
         "evidence": {
           "LOGISTICS": "物流很慢"
+        },
+        "acceptedEvidence": {
+          "LOGISTICS": [
+            "物流"
+          ]
         }
       }
     },
