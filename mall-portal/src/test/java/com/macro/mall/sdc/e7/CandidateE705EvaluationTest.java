@@ -33,10 +33,10 @@ class CandidateE705EvaluationTest {
         Result blue = new Result(State.OK, List.of(new Value(21L, "蓝", "蓝")), Set.of());
         Result longBlue = new Result(State.OK, List.of(new Value(21L, "蓝", "蓝色")), Set.of());
         Result red = new Result(State.OK, List.of(new Value(21L, "红", "蓝色")), Set.of());
-        assertTrue(CandidateE705Evaluation.score(text, List.of(color), "OK", Map.of(21L, "蓝"), Set.of(), blue).passed());
-        assertTrue(CandidateE705Evaluation.score(text, List.of(color), "OK", Map.of(21L, "蓝"), Set.of(), longBlue).passed());
-        assertFalse(CandidateE705Evaluation.score(text, List.of(color), "OK", Map.of(21L, "红"), Set.of(), red).passed());
-        assertFalse(CandidateE705Evaluation.score(text, List.of(color), "OK", Map.of(21L, "蓝"), Set.of(), red).passed());
+        assertTrue(CandidateE705Evaluation.score(text, List.of(color), "OK", Map.of(21L, "蓝"), Set.of(), Map.of(21L,Set.of("蓝","蓝色")), blue).passed());
+        assertTrue(CandidateE705Evaluation.score(text, List.of(color), "OK", Map.of(21L, "蓝"), Set.of(), Map.of(21L,Set.of("蓝","蓝色")), longBlue).passed());
+        assertFalse(CandidateE705Evaluation.score(text, List.of(color), "OK", Map.of(21L, "红"), Set.of(), Map.of(21L,Set.of("红","红色")), red).passed());
+        assertFalse(CandidateE705Evaluation.score(text, List.of(color), "OK", Map.of(21L, "蓝"), Set.of(), Map.of(21L,Set.of("蓝","蓝色")), red).passed());
 
         Result unrelated = new Result(State.OK, List.of(new Value(21L, "蓝", "手机")), Set.of());
         EvaluationSupport.Score pending = CandidateE705Evaluation.score("蓝色手机", List.of(color), "OK", Map.of(21L, "蓝"), Set.of(), unrelated);
@@ -63,7 +63,7 @@ class CandidateE705EvaluationTest {
     void catalogAttributeIdsAreScoredWithoutATeachingWhitelist() {
         AttributeSpec screen = new AttributeSpec(45L, "屏幕尺寸", Set.of("6.1英寸"), null);
         Result actual = new Result(State.OK, List.of(new Value(45L, "6.1英寸", "6.1英寸")), Set.of(48L));
-        assertTrue(CandidateE705Evaluation.score("6.1英寸", List.of(screen), "OK", Map.of(45L, "6.1英寸"), Set.of(48L), actual).passed());
+        assertTrue(CandidateE705Evaluation.score("6.1英寸", List.of(screen), "OK", Map.of(45L, "6.1英寸"), Set.of(48L), Map.of(45L,Set.of("6.1英寸")), actual).passed());
         assertEquals("out_of_domain", CandidateE705Evaluation.kindBucket("out_of_domain"));
         assertEquals("out_of_domain", CandidateE705Evaluation.kindBucket("ood"));
         assertTrue(EvaluationSupport.boundary("out_of_domain"));
@@ -136,4 +136,33 @@ class CandidateE705EvaluationTest {
         }
         throw new AssertionError(id + " " + implementation);
     }
+    @Test
+    void teacherQuotesAreIndependentOfTheCandidateAndInterfacesAreInjectable() throws Exception {
+        Result actual=new Result(State.OK,List.of(new Value(45L,"6.1英寸","六点一英寸")),Set.of());
+        assertTrue(CandidateE705Evaluation.score("六点一英寸屏幕",List.of(),"OK",Map.of(45L,"6.1英寸"),Set.of(),
+            Map.of(45L,Set.of("六点一英寸")),actual).passed());
+        assertFalse(CandidateE705Evaluation.score("六点一英寸屏幕",List.of(),"OK",Map.of(45L,"6.1英寸"),Set.of(),
+            Map.of(),actual).scored());
+        com.macro.mall.portal.ai.attributes.AttributeExtractionService a=request -> new Result(State.NEEDS_INPUT,List.of(),Set.of());
+        var cases=new ObjectMapper().readTree("""
+          [{"id":"n","kind":"normal","input":{"text":"","attributes":[]},"expected":{"state":"NEEDS_INPUT","values":[],"unknownIds":[]}}]
+          """);
+        var run=CandidateE705Evaluation.compareCases(cases,a,a,new ArrayList<>(),new int[]{0},new String[]{""});
+        assertEquals(2,run.rows().size());
+        assertTrue(run.rows().stream().allMatch(row -> Boolean.TRUE.equals(row.get("passed"))));
+    }
+    @org.junit.jupiter.api.Test
+    void publicOfflineRegressionRecordsRealOrdinaryResults() throws Exception {
+        var json=new ObjectMapper();
+        var cases=json.readTree(Files.readString(EvaluationFiles.task("E7-05").resolve("acceptance.json"))).path("cases");
+        com.macro.mall.portal.ai.attributes.AttributeExtractionService unavailable = request -> new com.macro.mall.portal.ai.attributes.AttributeExtractionService.Result(com.macro.mall.portal.ai.attributes.AttributeExtractionService.State.UNAVAILABLE,java.util.List.of(),Set.of());
+        var run=CandidateE705Evaluation.compareCases(cases,CandidateE705Evaluation.studentExisting(),unavailable,
+            new java.util.ArrayList<>(),new int[]{0},new String[]{""});
+        org.junit.jupiter.api.Assertions.assertEquals(64,run.rows().size());
+        Path report=Path.of("target","e7-05-public-offline.json");
+        Files.createDirectories(report.getParent());
+        json.writerWithDefaultPrettyPrinter().writeValue(report.toFile(),Map.of("evidenceType","public offline ordinary regression; model unavailable, not quality evidence",
+            "modelCalls",0,"decision","未完成","humanReview","未进行独立人工核对","results",run.rows()));
+    }
+
 }

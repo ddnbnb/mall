@@ -3,6 +3,7 @@ package com.macro.mall.sdc.e7;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.macro.mall.mapper.PmsProductMapper;
+import com.macro.mall.portal.ai.attributes.AttributeExtractionService;
 import com.macro.mall.portal.ai.attributes.AttributeExtractionService.AttributeSpec;
 import com.macro.mall.portal.ai.attributes.AttributeExtractionService.Request;
 import com.macro.mall.portal.ai.attributes.AttributeExtractionService.Result;
@@ -29,6 +30,12 @@ public final class CandidateE705Evaluation {
     public static final int ADVERSARIAL_EXPECTED = 8;
     public static final int OUT_OF_DOMAIN_EXPECTED = 4;
     public static final String QUALITY_NOTE = "质量门槛只陈述是否达标，不构成放行、降级或驳回结论";
+
+    // 本人替换两个构造，在线主入口和回放自动使用本人实现。
+    static AttributeExtractionService studentExisting() { return new ExistingAttributeExtractionService(EvaluationSupport.unavailable(PmsProductMapper.class)); }
+    static AttributeExtractionService studentLlm(AttributeExtractionService existing, com.macro.mall.portal.llm.LlmClient client) {
+        return new LlmAttributeExtractionService((ExistingAttributeExtractionService)existing,client);
+    }
 
     public record ComparisonRun(List<Map<String, Object>> rows, boolean safetyViolation) {}
 
@@ -132,30 +139,22 @@ public final class CandidateE705Evaluation {
 
     public static EvaluationSupport.Score score(String text, List<AttributeSpec> specs, String expectedState,
                                                Map<Long, String> values, Set<Long> unknownIds, Result actual) {
+        return score(text,specs,expectedState,values,unknownIds,Map.of(),actual);
+    }
+
+    public static EvaluationSupport.Score score(String text, List<AttributeSpec> specs, String expectedState,
+                                               Map<Long,String> values, Set<Long> unknownIds, Map<Long,Set<String>> accepted, Result actual) {
         String structural = failure(expectedState, values, unknownIds, actual);
         if (structural != null) {
             String category = structural.startsWith("重复") ? "比较器" : "业务";
             return EvaluationSupport.Score.fail(structural, category, structural);
-        }
-        Map<Long, AttributeSpec> byId = new LinkedHashMap<>();
-        if (specs != null) {
-            for (AttributeSpec spec : specs) {
-                byId.put(spec.id(), spec);
-            }
         }
         boolean pending = false;
         for (Value value : actual.values()) {
             if (value.evidence() == null || value.evidence().isBlank() || text == null || !text.contains(value.evidence())) {
                 return EvaluationSupport.Score.fail("evidence", "业务", "证据为空或不在原文");
             }
-            String supported = ExistingAttributeExtractionService.supportedCanonical(byId.get(value.attributeId()), value.evidence());
-            if (supported == null) {
-                pending = true;
-                continue;
-            }
-            if (!supported.equals(value.value())) {
-                return EvaluationSupport.Score.fail("value", "业务", "证据不支持该值");
-            }
+            if (!accepted.getOrDefault(value.attributeId(),Set.of()).contains(value.evidence())) pending=true;
         }
         if (pending) {
             return EvaluationSupport.Score.pending("evidence", "没有现成属性规则，待人工核对");
@@ -173,8 +172,8 @@ public final class CandidateE705Evaluation {
      * 每题先跑普通实现，再跑 LLM。两种实现收到同一份白名单和同一段文本。
      * 超时或模型不可用记为本题 UNAVAILABLE 并继续，不停止整轮。属性编号不限于 21、22、23。
      */
-    public static ComparisonRun compareCases(JsonNode cases, ExistingAttributeExtractionService existing,
-                                             LlmAttributeExtractionService llm, List<String> outputs, int[] calls, String[] failure) {
+    public static ComparisonRun compareCases(JsonNode cases, AttributeExtractionService existing,
+                                             AttributeExtractionService llm, List<String> outputs, int[] calls, String[] failure) {
         List<Map<String, Object>> rows = new ArrayList<>();
         boolean safetyViolation = false;
         if (cases == null || !cases.isArray()) {
@@ -206,7 +205,7 @@ public final class CandidateE705Evaluation {
                     if (!clientFailure[0].isBlank()) {
                         error = clientFailure[0];
                     }
-                    score = score(text, specs, expectedState, expectedValues, unknown, actual);
+                    score = score(text, specs, expectedState, expectedValues, unknown, acceptedQuotes(item), actual);
                 } catch (RuntimeException ex) {
                     error = EvaluationSupport.redact(ex.getClass().getSimpleName() + ": " + ex.getMessage());
                     if ("llm".equals(implementation)) {
@@ -266,6 +265,18 @@ public final class CandidateE705Evaluation {
         return specs;
     }
 
+    static Map<Long,Set<String>> acceptedQuotes(JsonNode item) {
+        Map<Long,Set<String>> quotes=new LinkedHashMap<>();
+        for(JsonNode value:item.path("expected").path("values")) {
+            Set<String> accepted=new LinkedHashSet<>();
+            JsonNode evidence=value.get("evidence");
+            if(evidence!=null && evidence.isTextual()) accepted.add(evidence.asText());
+            value.path("acceptedEvidence").forEach(part -> accepted.add(part.asText()));
+            quotes.put(value.path("attributeId").asLong(),Set.copyOf(accepted));
+        }
+        return quotes;
+    }
+
     private static Map<Long, String> expectedValues(JsonNode item) {
         Map<Long, String> expectedValues = new LinkedHashMap<>();
         JsonNode values = item.path("expected").path("values");
@@ -283,11 +294,11 @@ public final class CandidateE705Evaluation {
         ObjectMapper json = new ObjectMapper();
         JsonNode root = json.readTree(Files.readString(acceptance));
         JsonNode cases = root.isArray() ? root : root.path("cases");
-        var existing = new ExistingAttributeExtractionService(EvaluationSupport.unavailable(PmsProductMapper.class));
+        var existing = studentExisting();
         var calls = new int[] {0};
         var outputs = new ArrayList<String>();
         var failure = new String[] {""};
-        var llm = new LlmAttributeExtractionService(existing, EvaluationSupport.cursorClient(calls, outputs, failure));
+        var llm = studentLlm(existing, EvaluationSupport.cursorClient(calls, outputs, failure));
         long wallStart = System.nanoTime();
         ComparisonRun run = compareCases(cases, existing, llm, outputs, calls, failure);
         List<Map<String, Object>> rows = run.rows();
@@ -386,7 +397,7 @@ public final class CandidateE705Evaluation {
             }
         }
         JsonNode root = json.readTree(Files.readString(acceptance));
-        var existing = new ExistingAttributeExtractionService(EvaluationSupport.unavailable(PmsProductMapper.class));
+        var existing = studentExisting();
         List<Map<String, Object>> rows = new ArrayList<>();
         for (JsonNode item : root.isArray() ? root : root.path("cases")) {
             List<AttributeSpec> specs = new ArrayList<>();
@@ -426,7 +437,7 @@ public final class CandidateE705Evaluation {
                 EvaluationSupport.Score score;
                 try {
                     if ("llm".equals(implementation) && history.slot() == EvaluationSupport.ReplaySlot.PROTOCOL) {
-                        new LlmAttributeExtractionService(existing, (system, input) -> {
+                        studentLlm(existing, (system, input) -> {
                             EvaluationSupport.rejectAnswerLeak(system, input);
                             return script.isEmpty() ? "" : script.remove();
                         }).extract(request);
@@ -436,7 +447,7 @@ public final class CandidateE705Evaluation {
                         continue;
                     }
                     actual = "llm".equals(implementation)
-                            ? new LlmAttributeExtractionService(existing, (system, input) -> {
+                            ? studentLlm(existing, (system, input) -> {
                                 EvaluationSupport.rejectAnswerLeak(system, input);
                                 if (history.slot() == EvaluationSupport.ReplaySlot.LOCAL) {
                                     throw new IllegalStateException("零调用却请求模型");
@@ -447,7 +458,7 @@ public final class CandidateE705Evaluation {
                                 return next;
                             }).extract(request)
                             : existing.extract(request);
-                    score = score(text, specs, expectedState, expectedValues, unknown, actual);
+                    score = score(text, specs, expectedState, expectedValues, unknown, acceptedQuotes(item), actual);
                 } catch (RuntimeException ex) {
                     if ("llm".equals(implementation) && (history.slot() == EvaluationSupport.ReplaySlot.LOCAL
                             || "不可重算".equals(ex.getMessage()))) {

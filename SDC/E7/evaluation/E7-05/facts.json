@@ -37,5 +37,6 @@
   },
   "unknownRule": "未提及的白名单属性，以及提及但不能落入允许值的属性，都进入 unknownIds，不得写入 values。至少抽出一个合法值时 state=OK；一个合法值都没有时 state=NEEDS_INPUT，unknownIds 为本次白名单全部 id。",
   "brandRule": "“牌子一般是”“通常是”不构成这件商品的取值。",
-  "writeRule": "不得保存商品，不得接收持久化字段或白名单外 id。"
+  "writeRule": "不得保存商品，不得接收持久化字段或白名单外 id。",
+  "currentRuleRevision": "2026-11-07；公开回归与现行书面规则对齐，未作未见题独立人工核对"
 }

@@ -33,12 +33,19 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           },
           {
             "attributeId": 22,
             "value": "128GB",
-            "evidence": "128G"
+            "evidence": "128G",
+            "acceptedEvidence": [
+              "128G"
+            ]
           }
         ],
         "unknownIds": []
@@ -76,12 +83,20 @@
           {
             "attributeId": 21,
             "value": "蓝",
-            "evidence": "蓝色"
+            "evidence": "蓝色",
+            "acceptedEvidence": [
+              "蓝",
+              "蓝色"
+            ]
           },
           {
             "attributeId": 22,
             "value": "256GB",
-            "evidence": "256GB"
+            "evidence": "256GB",
+            "acceptedEvidence": [
+              "256G",
+              "256GB"
+            ]
           }
         ],
         "unknownIds": []
@@ -119,7 +134,11 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           }
         ],
         "unknownIds": [
@@ -159,7 +178,10 @@
           {
             "attributeId": 22,
             "value": "256GB",
-            "evidence": "256G"
+            "evidence": "256G",
+            "acceptedEvidence": [
+              "256G"
+            ]
           }
         ],
         "unknownIds": [
@@ -199,12 +221,20 @@
           {
             "attributeId": 21,
             "value": "蓝",
-            "evidence": "蓝色"
+            "evidence": "蓝色",
+            "acceptedEvidence": [
+              "蓝",
+              "蓝色"
+            ]
           },
           {
             "attributeId": 22,
             "value": "128GB",
-            "evidence": "128GB"
+            "evidence": "128GB",
+            "acceptedEvidence": [
+              "128G",
+              "128GB"
+            ]
           }
         ],
         "unknownIds": []
@@ -242,12 +272,19 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红"
+            "evidence": "红",
+            "acceptedEvidence": [
+              "红"
+            ]
           },
           {
             "attributeId": 22,
             "value": "128GB",
-            "evidence": "128GB"
+            "evidence": "128GB",
+            "acceptedEvidence": [
+              "128G",
+              "128GB"
+            ]
           }
         ],
         "unknownIds": []
@@ -285,12 +322,19 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           },
           {
             "attributeId": 22,
             "value": "128GB",
-            "evidence": "１２８Ｇ"
+            "evidence": "１２８Ｇ",
+            "acceptedEvidence": [
+              "１２８Ｇ"
+            ]
           }
         ],
         "unknownIds": []
@@ -328,7 +372,11 @@
           {
             "attributeId": 21,
             "value": "蓝",
-            "evidence": "蓝色"
+            "evidence": "蓝色",
+            "acceptedEvidence": [
+              "蓝",
+              "蓝色"
+            ]
           }
         ],
         "unknownIds": [
@@ -378,17 +426,28 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           },
           {
             "attributeId": 22,
             "value": "128GB",
-            "evidence": "128G"
+            "evidence": "128G",
+            "acceptedEvidence": [
+              "128G"
+            ]
           },
           {
             "attributeId": 23,
             "value": "M",
-            "evidence": "M号"
+            "evidence": "M号",
+            "acceptedEvidence": [
+              "M",
+              "M号"
+            ]
           }
         ],
         "unknownIds": []
@@ -436,12 +495,20 @@
           {
             "attributeId": 21,
             "value": "蓝",
-            "evidence": "蓝色"
+            "evidence": "蓝色",
+            "acceptedEvidence": [
+              "蓝",
+              "蓝色"
+            ]
           },
           {
             "attributeId": 23,
             "value": "L",
-            "evidence": "L码"
+            "evidence": "L码",
+            "acceptedEvidence": [
+              "L",
+              "L码"
+            ]
           }
         ],
         "unknownIds": [
@@ -481,12 +548,20 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           },
           {
             "attributeId": 22,
             "value": "256GB",
-            "evidence": "256GB"
+            "evidence": "256GB",
+            "acceptedEvidence": [
+              "256G",
+              "256GB"
+            ]
           }
         ],
         "unknownIds": []
@@ -524,12 +599,18 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红"
+            "evidence": "红",
+            "acceptedEvidence": [
+              "红"
+            ]
           },
           {
             "attributeId": 22,
             "value": "128GB",
-            "evidence": "128G"
+            "evidence": "128G",
+            "acceptedEvidence": [
+              "128G"
+            ]
           }
         ],
         "unknownIds": []
@@ -567,7 +648,11 @@
           {
             "attributeId": 21,
             "value": "蓝",
-            "evidence": "蓝色"
+            "evidence": "蓝色",
+            "acceptedEvidence": [
+              "蓝",
+              "蓝色"
+            ]
           }
         ],
         "unknownIds": [
@@ -617,7 +702,11 @@
           {
             "attributeId": 23,
             "value": "M",
-            "evidence": "M号"
+            "evidence": "M号",
+            "acceptedEvidence": [
+              "M",
+              "M号"
+            ]
           }
         ],
         "unknownIds": [
@@ -668,17 +757,27 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           },
           {
             "attributeId": 22,
             "value": "256GB",
-            "evidence": "256G"
+            "evidence": "256G",
+            "acceptedEvidence": [
+              "256G"
+            ]
           },
           {
             "attributeId": 23,
             "value": "L",
-            "evidence": "L"
+            "evidence": "L",
+            "acceptedEvidence": [
+              "L"
+            ]
           }
         ],
         "unknownIds": []
@@ -716,12 +815,18 @@
           {
             "attributeId": 21,
             "value": "蓝",
-            "evidence": "蓝"
+            "evidence": "蓝",
+            "acceptedEvidence": [
+              "蓝"
+            ]
           },
           {
             "attributeId": 22,
             "value": "128GB",
-            "evidence": "１２８GB"
+            "evidence": "１２８GB",
+            "acceptedEvidence": [
+              "１２８GB"
+            ]
           }
         ],
         "unknownIds": []
@@ -759,12 +864,19 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红"
+            "evidence": "红",
+            "acceptedEvidence": [
+              "红"
+            ]
           },
           {
             "attributeId": 22,
             "value": "256GB",
-            "evidence": "256GB"
+            "evidence": "256GB",
+            "acceptedEvidence": [
+              "256G",
+              "256GB"
+            ]
           }
         ],
         "unknownIds": []
@@ -812,12 +924,20 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           },
           {
             "attributeId": 23,
             "value": "S",
-            "evidence": "S号"
+            "evidence": "S号",
+            "acceptedEvidence": [
+              "S",
+              "S号"
+            ]
           }
         ],
         "unknownIds": [
@@ -857,12 +977,19 @@
           {
             "attributeId": 21,
             "value": "蓝",
-            "evidence": "蓝色"
+            "evidence": "蓝色",
+            "acceptedEvidence": [
+              "蓝",
+              "蓝色"
+            ]
           },
           {
             "attributeId": 22,
             "value": "256GB",
-            "evidence": "256G"
+            "evidence": "256G",
+            "acceptedEvidence": [
+              "256G"
+            ]
           }
         ],
         "unknownIds": []
@@ -910,12 +1037,19 @@
           {
             "attributeId": 22,
             "value": "256GB",
-            "evidence": "256GB"
+            "evidence": "256GB",
+            "acceptedEvidence": [
+              "256G",
+              "256GB"
+            ]
           },
           {
             "attributeId": 23,
             "value": "L",
-            "evidence": "L"
+            "evidence": "L",
+            "acceptedEvidence": [
+              "L"
+            ]
           }
         ],
         "unknownIds": [
@@ -955,7 +1089,11 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           }
         ],
         "unknownIds": [
@@ -995,7 +1133,10 @@
           {
             "attributeId": 22,
             "value": "128GB",
-            "evidence": "128G"
+            "evidence": "128G",
+            "acceptedEvidence": [
+              "128G"
+            ]
           }
         ],
         "unknownIds": [
@@ -1035,7 +1176,11 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           }
         ],
         "unknownIds": [
@@ -1075,12 +1220,19 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           },
           {
             "attributeId": 22,
             "value": "128GB",
-            "evidence": "128G"
+            "evidence": "128G",
+            "acceptedEvidence": [
+              "128G"
+            ]
           }
         ],
         "unknownIds": []
@@ -1153,7 +1305,11 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           }
         ],
         "unknownIds": [
@@ -1193,7 +1349,11 @@
           {
             "attributeId": 21,
             "value": "蓝",
-            "evidence": "蓝色"
+            "evidence": "蓝色",
+            "acceptedEvidence": [
+              "蓝",
+              "蓝色"
+            ]
           }
         ],
         "unknownIds": [
@@ -1233,12 +1393,19 @@
           {
             "attributeId": 21,
             "value": "红",
-            "evidence": "红色"
+            "evidence": "红色",
+            "acceptedEvidence": [
+              "红",
+              "红色"
+            ]
           },
           {
             "attributeId": 22,
             "value": "128GB",
-            "evidence": "128G"
+            "evidence": "128G",
+            "acceptedEvidence": [
+              "128G"
+            ]
           }
         ],
         "unknownIds": []
