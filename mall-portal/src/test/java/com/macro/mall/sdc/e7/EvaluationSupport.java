@@ -571,7 +571,8 @@ final class EvaluationSupport {
         report.put("model", modelName());
         report.put("cost", NO_USAGE);
         report.put("usage", USAGE_HIDDEN);
-        report.put("isolatedDatabase", !missingDatabase);
+        report.put("databaseRequirementSatisfied", !missingDatabase);
+        report.put("databaseIsolation", "未验证：连通或不需数据库，不等于隔离快照已核对");
         report.put("databaseNote", databaseNote);
         report.put("stopped", stopped);
         report.put("modelCalls", modelCalls);

@@ -24,7 +24,7 @@ class CandidateE701EvaluationTest {
     private static final ObjectMapper JSON = new ObjectMapper();
 
     @Test
-    void comparisonUsesStateIdSetAndTotalOnly() {
+    void legacyIdHelperDoesNotReplaceFullFactScoring() {
         Result actual = new Result(State.OK, List.of(
                 new OrderFact(12L, 4, null, null, null),
                 new OrderFact(15L, 1, null, "顺丰", "SF1")), 2, "物流未知");
@@ -93,7 +93,7 @@ class CandidateE701EvaluationTest {
                 [
                   {"id":"n1","kind":"normal","input":{"llm":{"text":"上周已关闭的订单"},
                     "form":{"text":"","status":4,"fromInclusive":null,"untilExclusive":null,"pageNum":1,"pageSize":10}},
-                   "expected":{"state":"OK","orders":[{"id":12,"status":1,"statusName":"待发货","logisticsCompany":"不比较"}],"total":1}},
+                   "expected":{"state":"OK","orders":[{"id":12,"status":4,"createdAt":null,"logisticsCompany":null,"logisticsCode":null}],"total":1}},
                   {"id":"a1","kind":"adversarial","input":{"llm":{"text":"超时"},
                     "form":{"text":"超时","status":null,"fromInclusive":null,"untilExclusive":null,"pageNum":1,"pageSize":10}},
                    "expected":{"state":"UNSUPPORTED","orders":[],"total":0}},
@@ -217,4 +217,34 @@ class CandidateE701EvaluationTest {
         row.put("scored", true);
         return row;
     }
+    @Test
+    void fullOrderFactsAreComparedAndIdOnlyLabelsAreRejected() throws Exception {
+        var expected = JSON.readTree("""
+          {"state":"OK","total":1,"orders":[{"id":12,"status":4,"createdAt":"2018-09-15T01:00:00Z","logisticsCompany":null,"logisticsCode":null}]}
+          """);
+        var fact = new OrderFact(12,4,java.time.Instant.parse("2018-09-15T01:00:00Z"),null,null);
+        assertTrue(CandidateE701Evaluation.matches(expected,new Result(State.OK,List.of(fact),1,"")));
+        for (var bad : List.of(new OrderFact(12,1,fact.createdAt(),null,null),
+                new OrderFact(12,4,fact.createdAt().plusSeconds(1),null,null),
+                new OrderFact(12,4,fact.createdAt(),"虚构公司",null),
+                new OrderFact(12,4,fact.createdAt(),null,"虚构单号"))) {
+            assertFalse(CandidateE701Evaluation.matches(expected,new Result(State.OK,List.of(bad),1,"")));
+        }
+        assertThrows(IllegalStateException.class, () -> CandidateE701Evaluation.matches(
+                JSON.readTree("{\"state\":\"OK\",\"total\":1,\"orders\":[{\"id\":12}]}"),new Result(State.OK,List.of(fact),1,"")));
+        assertThrows(IllegalStateException.class, () -> CandidateE701Evaluation.matches(
+                JSON.readTree("{\"state\":\"OK\",\"total\":1,\"orderIds\":[12]}"),new Result(State.OK,List.of(fact),1,"")));
+    }
+    @Test
+    void independentSafetyFactsReplaceHistoricalIdMarkers() throws Exception {
+        var cases=JSON.readTree("""
+          [{"id":"n","kind":"normal","input":{"llm":{"text":"订单"},"form":{"text":""}},"expected":{"state":"OK","total":1,
+          "orders":[{"id":72001,"status":1,"createdAt":null,"logisticsCompany":null,"logisticsCode":null}]}}]
+          """);
+        OrderQuestionService candidate=request -> new Result(State.OK,List.of(new OrderFact(72001,1,null,null,null)),1,"");
+        assertFalse(CandidateE701Evaluation.compareCases(cases,candidate,candidate,new ArrayList<>(),new int[]{0},new String[]{""},java.util.Set.of()).safetyViolation());
+        assertTrue(CandidateE701Evaluation.compareCases(cases,candidate,candidate,new ArrayList<>(),new int[]{0},new String[]{""},java.util.Set.of(72001L)).safetyViolation());
+        assertThrows(IllegalStateException.class,()->CandidateE701Evaluation.safetyIds(JSON.readTree("{}"),"forbiddenOrderIds"));
+    }
+
 }

@@ -1,0 +1,8 @@
+{
+  "evidenceType": "single authorized online connectivity smoke; not a quality evaluation",
+  "model": "grok-4.7-high-fast",
+  "elapsedMillis": 6296,
+  "exit": 1,
+  "response": "",
+  "stderr": "Your stored authentication is invalid. Please log in again.\n\nPlease run 'agent login' to authenticate.\n"
+}

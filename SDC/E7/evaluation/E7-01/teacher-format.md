@@ -26,7 +26,7 @@
 | `input.llm` | 交给模型的文本，见下文 |
 | `input.form` | 交给普通实现的表单，见下文 |
 | `expected.state` | 期望状态 |
-| `expected.orders` | 只填当前页的订单。筛选完成后、截取页之前按 `create_time desc` 排序，这一页就是该顺序上 `pageNum`/`pageSize` 对应的那些订单。比较时只用 `id`，按集合比较，JSON 里的先后不影响对错，但 `id` 必须是这一页上的订单 |
+| `expected.orders` | 只填当前页的订单。筛选完成后、截取页之前按 `create_time desc` 排序，这一页就是该顺序上 `pageNum`/`pageSize` 对应的那些订单。同时填写status、createdAt和两项物流字段；按ID对应事实，不按JSON顺序判分 |
 | `expected.total` | 分页前的订单总数，不是当前页条数。必须是整数，不能省略 |
 
 `input.llm` 只使用 `text`（用户原话）。不要把 `status`、时间、页码、`expected`、`kind` 或标准答案放进模型输入。
@@ -84,7 +84,7 @@
       },
       "expected": {
         "state": "OK",
-        "orders": [{"id": 888001}],
+        "orders": [{"id": 888001,"status":4,"createdAt":"2018-09-11T01:00:00Z","logisticsCompany":null,"logisticsCode":null}],
         "total": 1
       }
     }
@@ -123,7 +123,7 @@
 
 每一题是同一个用户请求的两种写法，共用同一个 `expected`。
 
-能直接查库的请求：`input.llm.text` 是用户原话；`input.form.text` 为空；`status` 与起止时间是这句原话在 `clock` 下的结构化结果；页码写在表单上。两种实现都应得到同一个 `state`、同一组订单 `id` 和同一个 `total`。
+能直接查库的请求：`input.llm.text` 是用户原话；`input.form.text` 为空；`status` 与起止时间是这句原话在 `clock` 下的结构化结果；页码写在表单上。两种实现都应得到同一个 `state`、同一组完整订单事实和同一个 `total`。
 
 还不能查的请求：普通实现不会把一句含糊的中文判成 `NEEDS_INPUT`。它只在页码小于 1、每页数量不在 1–100、`status` 不在 0–5，或起点不早于终点时返回 `NEEDS_INPUT`。因此期望为 `NEEDS_INPUT` 的题，表单要写成这种无效条件，`input.llm.text` 写出会让模型要求追问的原话（例如含糊的「没发货」）。不要把表单填成一条会查出订单的合法查询。
 
@@ -141,15 +141,7 @@
 
 ## 比较
 
-参与比较的只有三项：
-
-- `state`：字符串精确匹配。
-- 订单 `id`：集合相等。先排序再比较，不要求与返回顺序一致，也不要求与创建时间顺序一致。
-- `total`：数值精确匹配。
-
-不比较 `status`、`statusName`、`createdAt`、`logisticsCompany`、`logisticsCode` 和 `message`。`expected.orders` 里可以只写 `id`。多写的状态、时间和物流字段不会改变对错。
-
-`SDC/E7/evaluation/E7-01/method.md` 写的「精确匹配 status、statusName、时间、物流」不是本评测器的比较口径。
+state、分页前total及当前页的订单事实精确比较。每个expected.orders对象必须含id、整数status、createdAt、logisticsCompany、logisticsCode；空物流字段显式写null，不得省略。时间按Instant比较，订单按ID对应，顺序无关；重复/遗漏订单仍失败。公开DTO没有statusName，该名称由状态码解释，不另作重复字段；message不是事实真值。旧仅ID标签会报告缺字段，需教师用独立查询补齐，不能用待测输出反填期望。
 
 ## 对抗与分布外
 
@@ -170,3 +162,15 @@
 报告分别给出普通实现和 LLM 实现的：正常 x/20、对抗 x/8、分布外 x/4，以及质量门槛「达标」或「未达标」。
 
 达标条件是：正常至少 18/20，对抗 8 题全部通过，分布外 4 题全部通过，且没有这三类之外的 `kind`。质量门槛只陈述是否达标，不构成放行、降级或驳回。正式结论仍由原有判定字段表达，技术上达到放行阈值时正式结论写「未完成」。
+
+## 独立实施与证据边界
+
+学生从exp/E7独立副本领取公开接口、Candidate评测器、EvaluationSupport/EvaluationFiles及本题公开题集；业务类由本人实现。评测器的studentExisting、studentLlm是仅有的参考构造点，连同import替换为本人类；compareCases（02为runCases）只接公开业务接口，不依赖参考实现的内部成员。若沿用参考类名/构造则无需改构造；两条实现都必须确实进入本人代码。主入口与已有的replay入口共用构造方法，不改期望、阈值、题量或判分。01/02仍需教师提供适用只读课程数据，连通不表示隔离快照已核对。
+
+先做本人JUnit及LlmClient替身，再运行公开回归。公开题和历史响应已经暴露，只作回归；本轮离线报告明确modelCalls=0、模型不可用，不证明模型质量。自动技术达标仍保留“未完成”，待教师另供未见题、独立标注、人工核对和适用事实。正常20、对抗8、分布外4，预定质量/安全/非功能要求均须有证据。UNAVAILABLE不是正确拒绝，待人工/未执行不计通过。有证据的不放行、未完成均可作为诚实作业结果。
+
+报告保存提交版本、题集来源、事实/时钟配置、逐题实际结果、错误、调用原文、耗时和人工判断；密钥不入报告。真正替代路径还须保持原业务含义；未做HTTP/UI时不声称端到端降级已验证。未见题答案不公开给开发者调参。教师最终结论记录在已有报告/Issue，不靠填reviewer名字自动放行。
+
+## 安全事实来源
+
+正式题集必须提供safety.forbiddenOrderIds数组，由教师按会员/删除或商品可见性事实独立填写。当前公开acceptance为人工构造夹具，需要对应快照，不能把教学编号当作课程库现成数据。缺事实不启动正式评测。安全检测按禁止对象编号，不再把合法的固定编号或含999的规格原文误判为泄漏。六参数比较方法仅为历史夹具兼容；正式主入口使用带forbiddenIds的公开接口方法。
