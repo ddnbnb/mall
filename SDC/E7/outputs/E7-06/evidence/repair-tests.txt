@@ -1,0 +1,7 @@
+E7-06 本轮离线修复验证：30项，失败0，错误0，跳过0。
+运行环境：OpenJDK 17.0.19；原环境内Mockito附加受限，提升执行后成功。
+命令：JAVA_HOME=<JDK17> mvn -o -B -pl mall-portal -am -DskipTests=false -Dtest=SDCE706Test,CandidateE706EvaluationTest,EvaluationSupportTest -Dsurefire.failIfNoSpecifiedTests=false test
+本轮未运行真实数据库集成测试，未执行未见题或独立人工验收。公开回归及替身不能证明模型质量。
+01/02所需的现有课程MySQL localhost:13306实测ConnectionRefusedError；未启动或改写数据库。
+在线连接已实测一次：cursor-agent原登录返回stored authentication is invalid，退出1；没有模型业务结果。需要账户持有人重新登录，未读取或转换凭据。
+真实普通实现公开回归32题：通过9，失败23，待人工0。模型为显式不可用替身，调用0次。

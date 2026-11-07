@@ -1,0 +1,7 @@
+{
+  "configExists": true,
+  "databaseHost": "localhost",
+  "databasePort": 13306,
+  "databaseName": "mall",
+  "databaseTcp": "ConnectionRefusedError: [Errno 61] Connection refused"
+}

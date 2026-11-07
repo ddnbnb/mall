@@ -359,5 +359,18 @@ class CandidateE706EvaluationTest {
             ratios.put(label, BigDecimal.valueOf(counts.get(label)).divide(BigDecimal.valueOf(denominator), 4, RoundingMode.HALF_UP));
         }
         return ratios;
+    }    @org.junit.jupiter.api.Test
+    void publicOfflineRegressionRecordsRealOrdinaryResults() throws Exception {
+        var json=new ObjectMapper();
+        var cases=json.readTree(Files.readString(EvaluationFiles.task("E7-06").resolve("acceptance.json"))).path("cases");
+        com.macro.mall.portal.ai.reasons.ReturnReasonBatchService unavailable = request -> new com.macro.mall.portal.ai.reasons.ReturnReasonBatchService.Result(com.macro.mall.portal.ai.reasons.ReturnReasonBatchService.State.UNAVAILABLE,java.util.List.of(),Map.of(),Map.of(),0,0);
+        var run=CandidateE706Evaluation.compareCases(cases,CandidateE706Evaluation.studentExisting(),unavailable,
+            new java.util.ArrayList<>(),new int[]{0},new String[]{""});
+        org.junit.jupiter.api.Assertions.assertEquals(64,run.rows().size());
+        Path report=Path.of("target","e7-06-public-offline.json");
+        Files.createDirectories(report.getParent());
+        json.writerWithDefaultPrettyPrinter().writeValue(report.toFile(),Map.of("evidenceType","public offline ordinary regression; model unavailable, not quality evidence",
+            "modelCalls",0,"decision","未完成","humanReview","未进行独立人工核对","results",run.rows()));
     }
+
 }

@@ -312,6 +312,12 @@ public final class CandidateE706Evaluation {
         return new ComparisonRun(rows, safetyViolation);
     }
 
+    // 本人仅在这两个构造处接入自己的类；不改变题目、预检或比较规则。
+    static ReturnReasonBatchService studentExisting() { return new ExistingReturnReasonBatchService(); }
+    static ReturnReasonBatchService studentLlm(ReturnReasonBatchService existing, com.macro.mall.portal.llm.LlmClient client) {
+        return new LlmReturnReasonBatchService((ExistingReturnReasonBatchService)existing,client);
+    }
+
     public static void main(String[] args) throws Exception {
         if (args.length != 2) {
             throw new IllegalArgumentException("Usage: CandidateE706Evaluation acceptance.json report.json");
@@ -319,11 +325,11 @@ public final class CandidateE706Evaluation {
         Path acceptance = Path.of(args[0]);
         ObjectMapper json = new ObjectMapper();
         JsonNode root = json.readTree(Files.readString(acceptance));
-        var existing = new ExistingReturnReasonBatchService();
+        var existing = studentExisting();
         var calls = new int[] {0};
         var outputs = new ArrayList<String>();
         var failure = new String[] {""};
-        var llm = new LlmReturnReasonBatchService(existing, EvaluationSupport.cursorClient(calls, outputs, failure));
+        var llm = studentLlm(existing, EvaluationSupport.cursorClient(calls, outputs, failure));
         long wallStart = System.nanoTime();
         JsonNode cases = root.isArray() ? root : root.path("cases");
         ComparisonRun run = compareCases(cases, existing, llm, outputs, calls, failure);
@@ -421,7 +427,7 @@ public final class CandidateE706Evaluation {
                 if (row.path("passed").asBoolean()) oldLlmPass++;
             }
         }
-        var existing = new ExistingReturnReasonBatchService();
+        var existing = studentExisting();
         List<Map<String, Object>> rows = new ArrayList<>();
         JsonNode root = json.readTree(Files.readString(acceptance));
         for (JsonNode item : root.isArray() ? root : root.path("cases")) {
@@ -459,7 +465,7 @@ public final class CandidateE706Evaluation {
                 EvaluationSupport.Score scored;
                 try {
                     if ("llm".equals(implementation) && history.slot() == EvaluationSupport.ReplaySlot.PROTOCOL) {
-                        new LlmReturnReasonBatchService(existing, (system, input) -> {
+                        studentLlm(existing, (system, input) -> {
                             EvaluationSupport.rejectAnswerLeak(system, input);
                             return script.isEmpty() ? "" : script.remove();
                         }).analyze(batch);
@@ -468,7 +474,7 @@ public final class CandidateE706Evaluation {
                         continue;
                     }
                     actual = "llm".equals(implementation)
-                            ? new LlmReturnReasonBatchService(existing, (system, input) -> {
+                            ? studentLlm(existing, (system, input) -> {
                                 EvaluationSupport.rejectAnswerLeak(system, input);
                                 if (history.slot() == EvaluationSupport.ReplaySlot.LOCAL) {
                                     throw new IllegalStateException("零调用却请求模型");

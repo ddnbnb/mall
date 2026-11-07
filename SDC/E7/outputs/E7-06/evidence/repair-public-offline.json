@@ -1,0 +1,2187 @@
+{
+  "evidenceType" : "public offline ordinary regression; model unavailable, not quality evidence",
+  "modelCalls" : 0,
+  "humanReview" : "未进行独立人工核对",
+  "decision" : "未完成",
+  "results" : [ {
+    "id" : "E7-06-N01",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N01",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N02",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N02",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N03",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N03",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N04",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N04",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N05",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N05",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N06",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : true,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "",
+    "errorCategory" : "",
+    "detail" : "",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N06",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N07",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b02",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 2,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 2,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N07",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N08",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b02",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 2,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 2,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N08",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N09",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b02",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b03",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 3,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 3,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N09",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N10",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b02",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b03",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 3,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 3,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N10",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N11",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N11",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N12",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N12",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N13",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "QUALITY",
+        "evidence" : "质量问题",
+        "failed" : false
+      } ],
+      "counts" : {
+        "QUALITY" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "SIZE_SPEC" : 0,
+        "UNCERTAIN" : 0
+      },
+      "ratios" : {
+        "QUALITY" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "SIZE_SPEC" : 0.0000,
+        "UNCERTAIN" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N13",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N14",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N14",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N15",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N15",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N16",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N16",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N17",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b02",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b03",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 3,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 3,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N17",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N18",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b02",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 2,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 2,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N18",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N19",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N19",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N20",
+    "kind" : "normal",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b02",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b03",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 3,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 3,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-N20",
+    "kind" : "normal",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A01",
+    "kind" : "adversarial",
+    "implementation" : "existing",
+    "passed" : true,
+    "scored" : true,
+    "actualState" : "UNSUPPORTED",
+    "actual" : {
+      "state" : "UNSUPPORTED",
+      "items" : [ ],
+      "counts" : {
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0,
+        "UNCERTAIN" : 0
+      },
+      "ratios" : {
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000,
+        "UNCERTAIN" : 0.0000
+      },
+      "denominator" : 2,
+      "failedCount" : 0
+    },
+    "failedFields" : "",
+    "errorCategory" : "",
+    "detail" : "",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A01",
+    "kind" : "adversarial",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A02",
+    "kind" : "adversarial",
+    "implementation" : "existing",
+    "passed" : true,
+    "scored" : true,
+    "actualState" : "UNSUPPORTED",
+    "actual" : {
+      "state" : "UNSUPPORTED",
+      "items" : [ ],
+      "counts" : {
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0,
+        "UNCERTAIN" : 0
+      },
+      "ratios" : {
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000,
+        "UNCERTAIN" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "",
+    "errorCategory" : "",
+    "detail" : "",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A02",
+    "kind" : "adversarial",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A03",
+    "kind" : "adversarial",
+    "implementation" : "existing",
+    "passed" : true,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "",
+    "errorCategory" : "",
+    "detail" : "",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A03",
+    "kind" : "adversarial",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A04",
+    "kind" : "adversarial",
+    "implementation" : "existing",
+    "passed" : true,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "",
+    "errorCategory" : "",
+    "detail" : "",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A04",
+    "kind" : "adversarial",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A05",
+    "kind" : "adversarial",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b02",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 2,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 2,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A05",
+    "kind" : "adversarial",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A06",
+    "kind" : "adversarial",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : "物流破损",
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A06",
+    "kind" : "adversarial",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A07",
+    "kind" : "adversarial",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A07",
+    "kind" : "adversarial",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A08",
+    "kind" : "adversarial",
+    "implementation" : "existing",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      }, {
+        "anonymousId" : "b02",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 2,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 2,
+      "failedCount" : 0
+    },
+    "failedFields" : "labels",
+    "errorCategory" : "业务",
+    "detail" : "labels",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-A08",
+    "kind" : "adversarial",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-O01",
+    "kind" : "ood",
+    "implementation" : "existing",
+    "passed" : true,
+    "scored" : true,
+    "actualState" : "NEEDS_INPUT",
+    "actual" : {
+      "state" : "NEEDS_INPUT",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "",
+    "errorCategory" : "",
+    "detail" : "",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-O01",
+    "kind" : "ood",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-O02",
+    "kind" : "ood",
+    "implementation" : "existing",
+    "passed" : true,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "",
+    "errorCategory" : "",
+    "detail" : "",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-O02",
+    "kind" : "ood",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-O03",
+    "kind" : "ood",
+    "implementation" : "existing",
+    "passed" : true,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "",
+    "errorCategory" : "",
+    "detail" : "",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-O03",
+    "kind" : "ood",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-O04",
+    "kind" : "ood",
+    "implementation" : "existing",
+    "passed" : true,
+    "scored" : true,
+    "actualState" : "OK",
+    "actual" : {
+      "state" : "OK",
+      "items" : [ {
+        "anonymousId" : "b01",
+        "label" : "UNCERTAIN",
+        "evidence" : null,
+        "failed" : false
+      } ],
+      "counts" : {
+        "UNCERTAIN" : 1,
+        "LOGISTICS" : 0,
+        "OTHER" : 0,
+        "PREFERENCE" : 0,
+        "QUALITY" : 0,
+        "SIZE_SPEC" : 0
+      },
+      "ratios" : {
+        "UNCERTAIN" : 1.0000,
+        "LOGISTICS" : 0.0000,
+        "OTHER" : 0.0000,
+        "PREFERENCE" : 0.0000,
+        "QUALITY" : 0.0000,
+        "SIZE_SPEC" : 0.0000
+      },
+      "denominator" : 1,
+      "failedCount" : 0
+    },
+    "failedFields" : "",
+    "errorCategory" : "",
+    "detail" : "",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  }, {
+    "id" : "E7-06-O04",
+    "kind" : "ood",
+    "implementation" : "llm",
+    "passed" : false,
+    "scored" : true,
+    "actualState" : "UNAVAILABLE",
+    "actual" : {
+      "state" : "UNAVAILABLE",
+      "items" : [ ],
+      "counts" : { },
+      "ratios" : { },
+      "denominator" : 0,
+      "failedCount" : 0
+    },
+    "failedFields" : "state",
+    "errorCategory" : "业务",
+    "detail" : "state",
+    "countedAsCorrectRejection" : false,
+    "elapsedMillis" : 0,
+    "modelCalls" : 0,
+    "error" : "",
+    "modelOutput" : [ ],
+    "cost" : "无数据"
+  } ]
+}
