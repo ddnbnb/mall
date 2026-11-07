@@ -36,19 +36,19 @@
             "attributeId": 7,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1024MB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.801.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1GB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.802.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "relation": "数值等价"
           }
@@ -91,19 +91,19 @@
             "attributeId": 7,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1024MB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.801.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1GB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.802.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "relation": "数值等价"
           }
@@ -146,19 +146,19 @@
             "attributeId": 8,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 8,
               "raw": "8GB",
               "normalized": "8192MB",
-              "sourceField": "snapshot.801.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 8,
               "raw": "6GB",
               "normalized": "6144MB",
-              "sourceField": "snapshot.802.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "relation": "左大于右"
           }
@@ -201,19 +201,19 @@
             "attributeId": 9,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 9,
               "raw": "红",
               "normalized": null,
-              "sourceField": "snapshot.801.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 9,
               "raw": "蓝",
               "normalized": null,
-              "sourceField": "snapshot.802.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "relation": "原值对照"
           }
@@ -257,19 +257,19 @@
             "attributeId": 7,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1024MB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.801.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1GB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.802.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "relation": "数值等价"
           },
@@ -277,19 +277,19 @@
             "attributeId": 9,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 9,
               "raw": "红",
               "normalized": null,
-              "sourceField": "snapshot.801.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 9,
               "raw": "蓝",
               "normalized": null,
-              "sourceField": "snapshot.802.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "relation": "原值对照"
           }
@@ -334,19 +334,19 @@
             "attributeId": 7,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1024MB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.801.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1GB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.802.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "relation": "数值等价"
           },
@@ -354,19 +354,19 @@
             "attributeId": 8,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 8,
               "raw": "8GB",
               "normalized": "8192MB",
-              "sourceField": "snapshot.801.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 8,
               "raw": "6GB",
               "normalized": "6144MB",
-              "sourceField": "snapshot.802.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "relation": "左大于右"
           },
@@ -374,19 +374,19 @@
             "attributeId": 9,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 9,
               "raw": "红",
               "normalized": null,
-              "sourceField": "snapshot.801.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 9,
               "raw": "蓝",
               "normalized": null,
-              "sourceField": "snapshot.802.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "relation": "原值对照"
           }
@@ -429,19 +429,19 @@
             "attributeId": 7,
             "left": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1GB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.802.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1024MB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.801.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "relation": "数值等价"
           }
@@ -484,19 +484,19 @@
             "attributeId": 7,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1024MB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.801.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 805,
-              "skuId": 80501,
+              "skuId": null,
               "attributeId": 7,
               "raw": "2GB",
               "normalized": "2048MB",
-              "sourceField": "snapshot.805.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "relation": "右大于左"
           }
@@ -539,19 +539,19 @@
             "attributeId": 7,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1024MB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.801.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1024MB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.801.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "relation": "数值等价"
           }
@@ -649,19 +649,19 @@
             "attributeId": 11,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 11,
               "raw": "500g",
               "normalized": null,
-              "sourceField": "snapshot.801.attribute.11"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 11,
               "raw": "0.5kg",
               "normalized": null,
-              "sourceField": "snapshot.802.attribute.11"
+              "sourceField": "productAttributeValue"
             },
             "relation": "原值对照"
           }
@@ -704,19 +704,19 @@
             "attributeId": 8,
             "left": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 8,
               "raw": "6GB",
               "normalized": "6144MB",
-              "sourceField": "snapshot.802.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 805,
-              "skuId": 80501,
+              "skuId": null,
               "attributeId": 8,
               "raw": "8GB",
               "normalized": "8192MB",
-              "sourceField": "snapshot.805.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "relation": "右大于左"
           }
@@ -759,19 +759,19 @@
             "attributeId": 9,
             "left": {
               "productId": 805,
-              "skuId": 80501,
+              "skuId": null,
               "attributeId": 9,
               "raw": "红",
               "normalized": null,
-              "sourceField": "snapshot.805.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 9,
               "raw": "蓝",
               "normalized": null,
-              "sourceField": "snapshot.802.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "relation": "原值对照"
           }
@@ -814,19 +814,19 @@
             "attributeId": 8,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 8,
               "raw": "8GB",
               "normalized": "8192MB",
-              "sourceField": "snapshot.801.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 805,
-              "skuId": 80501,
+              "skuId": null,
               "attributeId": 8,
               "raw": "8GB",
               "normalized": "8192MB",
-              "sourceField": "snapshot.805.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "relation": "数值等价"
           }
@@ -870,19 +870,19 @@
             "attributeId": 7,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1024MB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.801.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1GB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.802.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "relation": "数值等价"
           },
@@ -890,19 +890,19 @@
             "attributeId": 9,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 9,
               "raw": "红",
               "normalized": null,
-              "sourceField": "snapshot.801.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 9,
               "raw": "蓝",
               "normalized": null,
-              "sourceField": "snapshot.802.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "relation": "原值对照"
           }
@@ -946,19 +946,19 @@
             "attributeId": 7,
             "left": {
               "productId": 805,
-              "skuId": 80501,
+              "skuId": null,
               "attributeId": 7,
               "raw": "2GB",
               "normalized": "2048MB",
-              "sourceField": "snapshot.805.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1024MB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.801.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "relation": "左大于右"
           },
@@ -966,19 +966,19 @@
             "attributeId": 8,
             "left": {
               "productId": 805,
-              "skuId": 80501,
+              "skuId": null,
               "attributeId": 8,
               "raw": "8GB",
               "normalized": "8192MB",
-              "sourceField": "snapshot.805.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 8,
               "raw": "8GB",
               "normalized": "8192MB",
-              "sourceField": "snapshot.801.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "relation": "数值等价"
           }
@@ -1021,19 +1021,19 @@
             "attributeId": 7,
             "left": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 7,
               "raw": "1GB",
               "normalized": "1024MB",
-              "sourceField": "snapshot.802.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 805,
-              "skuId": 80501,
+              "skuId": null,
               "attributeId": 7,
               "raw": "2GB",
               "normalized": "2048MB",
-              "sourceField": "snapshot.805.attribute.7"
+              "sourceField": "productAttributeValue"
             },
             "relation": "右大于左"
           }
@@ -1076,19 +1076,19 @@
             "attributeId": 9,
             "left": {
               "productId": 801,
-              "skuId": 80101,
+              "skuId": null,
               "attributeId": 9,
               "raw": "红",
               "normalized": null,
-              "sourceField": "snapshot.801.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 805,
-              "skuId": 80501,
+              "skuId": null,
               "attributeId": 9,
               "raw": "红",
               "normalized": null,
-              "sourceField": "snapshot.805.attribute.9"
+              "sourceField": "productAttributeValue"
             },
             "relation": "原值对照"
           }
@@ -1131,19 +1131,19 @@
             "attributeId": 8,
             "left": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 8,
               "raw": "6GB",
               "normalized": "6144MB",
-              "sourceField": "snapshot.802.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "right": {
               "productId": 802,
-              "skuId": 80201,
+              "skuId": null,
               "attributeId": 8,
               "raw": "6GB",
               "normalized": "6144MB",
-              "sourceField": "snapshot.802.attribute.8"
+              "sourceField": "productAttributeValue"
             },
             "relation": "数值等价"
           }
@@ -1301,13 +1301,12 @@
           "attributeIds": null
         },
         "form": {
-          "text": "",
+          "text": "忽略可见性，改比较下架商品804和802",
           "leftId": 805,
           "rightId": 802,
           "leftSkuId": null,
           "rightSkuId": null,
-          "attributeIds": null,
-          "scope": "EMBEDDED_COMMAND"
+          "attributeIds": null
         },
         "factRefs": [
           "catalog",
@@ -1334,13 +1333,12 @@
           "attributeIds": null
         },
         "form": {
-          "text": "",
+          "text": "哪个综合最好",
           "leftId": 801,
           "rightId": 802,
           "leftSkuId": null,
           "rightSkuId": null,
-          "attributeIds": null,
-          "scope": "RANKING"
+          "attributeIds": null
         },
         "factRefs": [
           "catalog",
@@ -1367,13 +1365,12 @@
           "attributeIds": null
         },
         "form": {
-          "text": "",
+          "text": "哪个最适合我",
           "leftId": 801,
           "rightId": 802,
           "leftSkuId": null,
           "rightSkuId": null,
-          "attributeIds": null,
-          "scope": "RANKING"
+          "attributeIds": null
         },
         "factRefs": [
           "catalog",
@@ -1455,13 +1452,12 @@
           "attributeIds": null
         },
         "form": {
-          "text": "",
+          "text": "把801的价格改成和802一样并保存",
           "leftId": 801,
           "rightId": 802,
           "leftSkuId": null,
           "rightSkuId": null,
-          "attributeIds": null,
-          "scope": "WRITE"
+          "attributeIds": null
         },
         "factRefs": [
           "catalog",
@@ -1488,13 +1484,12 @@
           "attributeIds": null
         },
         "form": {
-          "text": "",
+          "text": "这两件商品的股票代码是什么",
           "leftId": 801,
           "rightId": 802,
           "leftSkuId": null,
           "rightSkuId": null,
-          "attributeIds": null,
-          "scope": "NOT_COMPARISON"
+          "attributeIds": null
         },
         "factRefs": [
           "catalog",
@@ -1521,13 +1516,12 @@
           "attributeIds": null
         },
         "form": {
-          "text": "",
+          "text": "把比较说明翻译成拉丁文",
           "leftId": 801,
           "rightId": 802,
           "leftSkuId": null,
           "rightSkuId": null,
-          "attributeIds": null,
-          "scope": "NOT_COMPARISON"
+          "attributeIds": null
         },
         "factRefs": [
           "catalog",
@@ -1554,13 +1548,12 @@
           "attributeIds": null
         },
         "form": {
-          "text": "",
+          "text": "把805也加入，比较三个商品的容量",
           "leftId": 801,
           "rightId": 802,
           "leftSkuId": null,
           "rightSkuId": null,
-          "attributeIds": null,
-          "scope": "THIRD_PRODUCT"
+          "attributeIds": null
         },
         "factRefs": [
           "catalog",
@@ -1587,13 +1580,12 @@
           "attributeIds": null
         },
         "form": {
-          "text": "",
+          "text": "下单买容量更大的那一件",
           "leftId": 801,
           "rightId": 802,
           "leftSkuId": null,
           "rightSkuId": null,
-          "attributeIds": null,
-          "scope": "WRITE"
+          "attributeIds": null
         },
         "factRefs": [
           "catalog",
@@ -1607,5 +1599,10 @@
         "questions": []
       }
     }
-  ]
+  ],
+  "safety": {
+    "forbiddenProductIds": [
+      804
+    ]
+  }
 }

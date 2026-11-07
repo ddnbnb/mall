@@ -136,7 +136,7 @@ class SDCE702DatabaseTest {
         Result removed = service.compare(new Request(fixture.deletedProduct, left, null, null, null, List.of(capacity)));
         assertEquals(State.UNSUPPORTED, removed.state());
         assertTrue(removed.rows().isEmpty());
-        assertTrue(CandidateE702Evaluation.teachingProductsReady(service, fixture.productFacts));
+        assertTrue(teachingProductsReady(service, fixture.productFacts));
     }
 
     private static void spoilAndReject(DataSource dataSource, ExistingProductComparisonService products,
@@ -147,7 +147,7 @@ class SDCE702DatabaseTest {
             spec.setLong(2, fixture.sku("80101"));
             assertEquals(1, spec.executeUpdate());
             assertTrue(products.visible(fixture.product("801")));
-            assertFalse(CandidateE702Evaluation.teachingProductsReady(products, fixture.productFacts));
+            assertFalse(teachingProductsReady(products, fixture.productFacts));
         }
     }
 
@@ -427,4 +427,64 @@ class SDCE702DatabaseTest {
             return attributes.get(factsId);
         }
     }
+    static boolean teachingProductsReady(ExistingProductComparisonService service, JsonNode facts) {
+        java.util.Set<Long> catalog = new java.util.LinkedHashSet<>();
+        facts.path("catalog").forEach(node -> catalog.add(node.path("id").asLong()));
+        if (catalog.isEmpty()) {
+            return false;
+        }
+        boolean sawVisible = false;
+        boolean checkedValue = false;
+        var fields = facts.path("snapshots").fields();
+        while (fields.hasNext()) {
+            var entry = fields.next();
+            long id = Long.parseLong(entry.getKey());
+            JsonNode snap = entry.getValue();
+            boolean shouldShow = snap.has("visible") && snap.path("visible").asBoolean();
+            if (!snap.has("visible") || service.visible(id) != shouldShow) {
+                return false;
+            }
+            if (!shouldShow) {
+                continue;
+            }
+            sawVisible = true;
+            if (!service.candidateIds(id, id).equals(catalog)) {
+                return false;
+            }
+            if (snap.has("values")) {
+                var values = snap.path("values").fields();
+                while (values.hasNext()) {
+                    var value = values.next();
+                    if (!rawMatches(service, id, null, Long.parseLong(value.getKey()), value.getValue().asText())) {
+                        return false;
+                    }
+                    checkedValue = true;
+                }
+            }
+            if (snap.has("skuValues")) {
+                var skus = snap.path("skuValues").fields();
+                while (skus.hasNext()) {
+                    var sku = skus.next();
+                    long skuId = Long.parseLong(sku.getKey());
+                    var values = sku.getValue().fields();
+                    while (values.hasNext()) {
+                        var value = values.next();
+                        if (!rawMatches(service, id, skuId, Long.parseLong(value.getKey()), value.getValue().asText())) {
+                            return false;
+                        }
+                        checkedValue = true;
+                    }
+                }
+            }
+        }
+        return sawVisible && checkedValue;
+    }
+
+    private static boolean rawMatches(ExistingProductComparisonService service, long productId, Long skuId,
+                                      long attributeId, String expectedRaw) {
+        Result result = service.compare(new Request(productId, productId, skuId, skuId, null, List.of(attributeId)));
+        return result.rows().size() == 1 && expectedRaw.equals(result.rows().get(0).left().raw());
+    }
+
+
 }

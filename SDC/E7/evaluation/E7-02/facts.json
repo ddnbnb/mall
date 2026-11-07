@@ -133,7 +133,5 @@
       }
     }
   },
-  "unresolved": [
-    "不等关系的 relation 字面量、rows 顺序、questions 文案、超过三个属性时是追问还是截断，规格都没有写死。"
-  ]
+  "currentRuleRevision": "2026-11-07；公开回归与现行书面规则对齐，未作未见题独立人工核对"
 }

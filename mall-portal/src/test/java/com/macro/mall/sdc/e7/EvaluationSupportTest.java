@@ -123,7 +123,7 @@ class EvaluationSupportTest {
                 EvaluationSupport.onlineExtra(false, true, false, normalCases, 0, false));
         JsonNode saved = new ObjectMapper().readTree(report.toFile());
         assertEquals("未完成", saved.path("decision").asText());
-        assertFalse(saved.path("isolatedDatabase").asBoolean());
+        assertFalse(saved.path("databaseRequirementSatisfied").asBoolean());
         assertEquals(EvaluationSupport.processExit(decision), saved.path("processExit").asInt());
     }
 
@@ -142,7 +142,7 @@ class EvaluationSupportTest {
         JsonNode saved = new ObjectMapper().readTree(pass.toFile());
         assertEquals("放行", saved.path("technicalThreshold").asText());
         assertEquals("未完成", saved.path("decision").asText());
-        assertTrue(saved.path("isolatedDatabase").asBoolean());
+        assertTrue(saved.path("databaseRequirementSatisfied").asBoolean());
         assertEquals(0, EvaluationSupport.processExit("不放行"));
         assertEquals(0, EvaluationSupport.processExit("降级"));
         assertEquals(EvaluationSupport.processExit(decision), saved.path("processExit").asInt());

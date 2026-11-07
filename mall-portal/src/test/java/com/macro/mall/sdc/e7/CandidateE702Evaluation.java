@@ -6,6 +6,7 @@ import com.macro.mall.mapper.PmsProductAttributeMapper;
 import com.macro.mall.mapper.PmsProductAttributeValueMapper;
 import com.macro.mall.mapper.PmsProductMapper;
 import com.macro.mall.mapper.PmsSkuStockMapper;
+import com.macro.mall.portal.ai.comparison.ProductComparisonService;
 import com.macro.mall.portal.ai.comparison.ExistingProductComparisonService;
 import com.macro.mall.portal.ai.comparison.LlmProductComparisonService;
 import com.macro.mall.portal.ai.comparison.ProductComparisonService.Request;
@@ -168,32 +169,49 @@ public final class CandidateE702Evaluation {
                 existingNormalReliable, safetyViolation);
     }
 
+    // 本人仅在这两个构造处接入自己的类；不改变题目、预检或比较规则。
+    static ProductComparisonService studentExisting(ConfigurableApplicationContext context) {
+        return new ExistingProductComparisonService(context.getBean(PmsProductMapper.class),context.getBean(PmsProductAttributeMapper.class),context.getBean(PmsProductAttributeValueMapper.class),context.getBean(PmsSkuStockMapper.class));
+    }
+    static ProductComparisonService studentLlm(ProductComparisonService existing, com.macro.mall.portal.llm.LlmClient client) {
+        return new LlmProductComparisonService((ExistingProductComparisonService)existing,client);
+    }
+
+    static java.util.Set<Long> safetyIds(JsonNode root,String field) {
+        JsonNode ids=root.path("safety").path(field);
+        if(!ids.isArray()) throw new IllegalStateException("教师题集缺少可信 safety."+field);
+        java.util.Set<Long> values=new java.util.LinkedHashSet<>();
+        for(JsonNode id:ids) {
+            if(!id.isIntegralNumber() || !id.canConvertToLong()) throw new IllegalStateException("安全事实编号必须为整数");
+            values.add(id.longValue());
+        }
+        return java.util.Set.copyOf(values);
+    }
+
     public static void main(String[] args) throws Exception {
         if (args.length != 2) {
             throw new IllegalArgumentException("Usage: CandidateE702Evaluation acceptance.json report.json");
         }
         Path acceptance = Path.of(args[0]);
         ObjectMapper json = new ObjectMapper();
-        JsonNode caseNode = rootCases(json.readTree(Files.readString(acceptance)));
+        JsonNode root = json.readTree(Files.readString(acceptance));
+        JsonNode caseNode = rootCases(root);
         List<String> problems = caseSetProblems(caseNode);
         if (!problems.isEmpty()) {
             throw new IllegalArgumentException(String.join("；", problems));
         }
+        safetyIds(root,"forbiddenProductIds");
         long wallStart = System.nanoTime();
         EvaluationSupport.TeachingGate gate = EvaluationSupport.connectSdc();
         boolean isolated = false;
         String databaseNote = gate.note();
         String errorCategory = precheckCategory(databaseNote);
         ConfigurableApplicationContext context = null;
-        ExistingProductComparisonService existing = null;
+        ProductComparisonService existing = null;
         if (gate.reachable()) {
             try {
                 context = EvaluationSupport.openSdc(gate.config());
-                existing = new ExistingProductComparisonService(
-                        context.getBean(PmsProductMapper.class),
-                        context.getBean(PmsProductAttributeMapper.class),
-                        context.getBean(PmsProductAttributeValueMapper.class),
-                        context.getBean(PmsSkuStockMapper.class));
+                existing = studentExisting(context);
                 isolated = true;
                 databaseNote = "已通过 application-sdc.yml 取得商品 Mapper。商品、SKU 和属性编号来自题集，不要求教学商品 801–805 在库中。";
             } catch (RuntimeException ex) {
@@ -223,8 +241,8 @@ public final class CandidateE702Evaluation {
         var calls = new int[] {0};
         var outputs = new ArrayList<String>();
         var failure = new String[] {""};
-        var llm = new LlmProductComparisonService(existing, EvaluationSupport.cursorClient(calls, outputs, failure));
-        Round round = runCases(caseNode, existing, llm, isolated, calls, outputs, failure);
+        var llm = studentLlm(existing, EvaluationSupport.cursorClient(calls, outputs, failure));
+        Round round = runCases(caseNode, existing, llm, isolated, calls, outputs, failure, safetyIds(root,"forbiddenProductIds"));
         EvaluationSupport.appendNotRun(round.rows(), caseNode);
         boolean boundariesHeld = round.boundaryCases() == 12 && round.boundaryPasses() == 12;
         boolean ordinary = round.existingNormalPasses() == 20 && !round.safetyViolation();
@@ -244,8 +262,13 @@ public final class CandidateE702Evaluation {
     }
 
     /** Runs every case on both implementations. One timeout or model failure stays on that case. */
-    static Round runCases(JsonNode caseNode, ExistingProductComparisonService existing, LlmProductComparisonService llm,
+    public static Round runCases(JsonNode caseNode, ProductComparisonService existing, ProductComparisonService llm,
                           boolean isolated, int[] calls, List<String> outputs, String[] failure) {
+        return runCases(caseNode,existing,llm,isolated,calls,outputs,failure,Set.of(804L));
+    }
+
+    public static Round runCases(JsonNode caseNode, ProductComparisonService existing, ProductComparisonService llm,
+                          boolean isolated, int[] calls, List<String> outputs, String[] failure, Set<Long> forbiddenIds) {
         List<Map<String, Object>> rows = new ArrayList<>();
         List<ScoredCase> scoredCases = new ArrayList<>();
         int normalCases = 0, normalPasses = 0, boundaryCases = 0, boundaryPasses = 0, existingNormalPasses = 0;
@@ -286,8 +309,8 @@ public final class CandidateE702Evaluation {
                 if (scored && normal && "existing".equals(implementation) && passed) existingNormalPasses++;
                 if (boundary && "llm".equals(implementation)) llmBoundary = scored && passed;
                 if (scored && boundary && "OK".equals(actual.state().name()) && !"OK".equals(expected.path("state").asText())) safetyViolation = true;
-                boolean leaked = actual.rows().stream().anyMatch(row -> String.valueOf(row.left().raw()).contains("999")
-                        || String.valueOf(row.right().raw()).contains("999"));
+                boolean leaked = actual.rows().stream().anyMatch(row -> forbiddenIds.contains(row.left().productId())
+                        || forbiddenIds.contains(row.right().productId()));
                 if (leaked) safetyViolation = true;
                 Map<String, Object> row = new LinkedHashMap<>();
                 row.put("id", item.path("id").asText());
@@ -314,65 +337,6 @@ public final class CandidateE702Evaluation {
         }
         return new Round(rows, scoredCases, normalCases, normalPasses, boundaryCases, boundaryPasses,
                 existingNormalPasses, safetyViolation, false);
-    }
-
-    static boolean teachingProductsReady(ExistingProductComparisonService service, JsonNode facts) {
-        java.util.Set<Long> catalog = new java.util.LinkedHashSet<>();
-        facts.path("catalog").forEach(node -> catalog.add(node.path("id").asLong()));
-        if (catalog.isEmpty()) {
-            return false;
-        }
-        boolean sawVisible = false;
-        boolean checkedValue = false;
-        var fields = facts.path("snapshots").fields();
-        while (fields.hasNext()) {
-            var entry = fields.next();
-            long id = Long.parseLong(entry.getKey());
-            JsonNode snap = entry.getValue();
-            boolean shouldShow = snap.has("visible") && snap.path("visible").asBoolean();
-            if (!snap.has("visible") || service.visible(id) != shouldShow) {
-                return false;
-            }
-            if (!shouldShow) {
-                continue;
-            }
-            sawVisible = true;
-            if (!service.candidateIds(id, id).equals(catalog)) {
-                return false;
-            }
-            if (snap.has("values")) {
-                var values = snap.path("values").fields();
-                while (values.hasNext()) {
-                    var value = values.next();
-                    if (!rawMatches(service, id, null, Long.parseLong(value.getKey()), value.getValue().asText())) {
-                        return false;
-                    }
-                    checkedValue = true;
-                }
-            }
-            if (snap.has("skuValues")) {
-                var skus = snap.path("skuValues").fields();
-                while (skus.hasNext()) {
-                    var sku = skus.next();
-                    long skuId = Long.parseLong(sku.getKey());
-                    var values = sku.getValue().fields();
-                    while (values.hasNext()) {
-                        var value = values.next();
-                        if (!rawMatches(service, id, skuId, Long.parseLong(value.getKey()), value.getValue().asText())) {
-                            return false;
-                        }
-                        checkedValue = true;
-                    }
-                }
-            }
-        }
-        return sawVisible && checkedValue;
-    }
-
-    private static boolean rawMatches(ExistingProductComparisonService service, long productId, Long skuId,
-                                      long attributeId, String expectedRaw) {
-        Result result = service.compare(new Request(productId, productId, skuId, skuId, null, List.of(attributeId)));
-        return result.rows().size() == 1 && expectedRaw.equals(result.rows().get(0).left().raw());
     }
 
     private static String precheckCategory(String note) {
