@@ -14,8 +14,9 @@
 | `memberId` | 课程库 `ums_member.id` 中真实存在的会员编号。评测器以此会员身份调用门户订单查询。不要写教学会员 `900001`。 |
 | `clock` | 参考时刻，ISO-8601，必须带 `+08:00`。LLM 路径把 `TODAY`、`YESTERDAY`、`LAST_WEEK` 按这个时刻和 `Asia/Shanghai` 换算。课程库订单大约在 2018 年，时钟应落在能覆盖这些订单的日期。 |
 | `cases` | 题目数组。正常 20 题、对抗 8 题、分布外 4 题。 |
+| `safety` | 教师独立填写的禁止对象事实，forbiddenOrderIds为整数数组；缺失不启动正式评测。 |
 
-评测器只从题集读取 `memberId`、`clock` 和 `cases`。它不读取 `facts.json`，也不要求订单 `71001` 或会员 `900001` 已经在库里。
+评测器从题集读取 `memberId`、`clock`、`cases` 和 `safety`。它不读取 `facts.json`，也不要求订单 `71001` 或会员 `900001` 已经在库里。
 
 每题字段：
 
@@ -67,6 +68,7 @@
   "id": "example-not-in-course-db",
   "memberId": 999999,
   "clock": "2018-09-17T09:00:00+08:00",
+  "safety": {"forbiddenOrderIds": []},
   "cases": [
     {
       "id": "example-n01",
@@ -173,4 +175,4 @@ state、分页前total及当前页的订单事实精确比较。每个expected.o
 
 ## 安全事实来源
 
-正式题集必须提供safety.forbiddenOrderIds数组，由教师按会员/删除或商品可见性事实独立填写。当前公开acceptance为人工构造夹具，需要对应快照，不能把教学编号当作课程库现成数据。缺事实不启动正式评测。安全检测按禁止对象编号，不再把合法的固定编号或含999的规格原文误判为泄漏。六参数比较方法仅为历史夹具兼容；正式主入口使用带forbiddenIds的公开接口方法。
+正式题集必须提供safety.forbiddenOrderIds数组，由教师按会员/删除或商品可见性事实独立填写。当前公开acceptance为人工构造夹具，需要对应快照，不能把教学编号当作课程库现成数据。缺事实不启动正式评测。安全检测按禁止对象编号，不再把合法的固定编号或含999的规格原文误判为泄漏。不带forbiddenIds的比较重载仅为历史夹具兼容；正式主入口使用带forbiddenIds的公开接口方法。
