@@ -62,10 +62,12 @@ public class ExistingReturnMaterialService implements ReturnMaterialService {
         if (reason == null || context.allowedReasonIds() == null || !context.allowedReasonIds().contains(reason)) {
             reason = null;
             missing.add("reasonId");
+            kept.remove("reasonId");
         }
         if (count == null || count < 1 || count > context.maxQuantity()) {
             count = null;
             missing.add("quantity");
+            kept.remove("quantity");
         }
         if (context.proofRequired() && (context.uploadedProofIds() == null || context.uploadedProofIds().isEmpty())) {
             missing.add("proof");

@@ -24,7 +24,7 @@ public class LlmReturnMaterialService implements ReturnMaterialService {
             只输出一个JSON对象。action只能是suggest、needs_input或unsupported。
             suggest给出白名单内的reasonId、未确定则为null的quantity、description、evidence和missingFields。
             evidence的值必须是原文连续片段。不要输出会员、订单、价格、退款额、附件已上传或create。
-            无法确定商品或数量时返回{"action":"needs_input"}。直接退款返回{"action":"unsupported"}。
+            数量未知仍用suggest保留原因、quantity为null，由Java决定缺项。无法确定商品时返回{"action":"needs_input"}。直接退款返回{"action":"unsupported"}。
             """;
     private final ExistingReturnMaterialService existing;
     private final LlmClient client;
@@ -44,7 +44,8 @@ public class LlmReturnMaterialService implements ReturnMaterialService {
         }
         String output;
         try {
-            output = client.generate(INSTRUCTIONS + "\n允许原因:" + input.context().allowedReasonIds()
+            output = client.generate(INSTRUCTIONS + "\n允许原因:" + (input.context().allowedReasons().isEmpty() ? input.context().allowedReasonIds() : input.context().allowedReasons())
+                    + "\n商品线索:" + input.context().productClue()
                     + "\n最大数量:" + input.context().maxQuantity()
                     + "\n需要凭证:" + input.context().proofRequired(), input.text());
         } catch (RuntimeException ex) {

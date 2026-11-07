@@ -141,5 +141,19 @@ class SDCE703Test {
         assertEquals("DEGRADE", CandidateE703Evaluation.verdict(20, 17, 12, 12, true, false));
         assertEquals("REJECT", CandidateE703Evaluation.verdict(20, 20, 12, 12, true, true));
         assertEquals("INCOMPLETE", CandidateE703Evaluation.verdict(19, 19, 12, 12, true, false));
+    }    @Test
+    void promptUsesReasonNamesAndProductClueWithoutIdentityOrLabels() {
+        var writer=mock(OmsPortalOrderReturnApplyService.class);
+        var context=new ItemContext(73001,73011,2,java.util.Map.of(17L,"质量"),"运动鞋",true,Set.of());
+        var result=new LlmReturnMaterialService(new ExistingReturnMaterialService(writer),(system,input)-> {
+            assertTrue(system.contains("质量")); assertTrue(system.contains("运动鞋"));
+            assertFalse(system.contains("73001")); assertFalse(system.contains("73011"));
+            EvaluationSupport.rejectAnswerLeak(system,input);
+            return "{\"action\":\"suggest\",\"reasonId\":17,\"quantity\":null,\"description\":\"开胶\",\"evidence\":{\"reasonId\":\"开胶\"},\"missingFields\":[\"quantity\"]}";
+        }).suggest(new Request(context,"开胶，数量还没决定",null,null));
+        assertEquals(State.NEEDS_INPUT,result.state()); assertEquals(17L,result.reasonId());
+        assertNull(result.quantity()); assertEquals(Set.of("quantity","proof"),result.missingFields());
+        verifyNoInteractions(writer);
     }
+
 }

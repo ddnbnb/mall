@@ -32,7 +32,7 @@
     "“两双都退”“两双…都退”“两双…全部退货”为 2。",
     "超过 2、与“两双”矛盾的 3、或只给出越界数量时，quantity 为 null，不得夹到 2，也不得采用 99。"
   ],
-  "proofRule": "本集由夹具声明 proofRequired。附件是否已上传只看来自 serviceContext.uploadedProofIds，不看文本里的“照片已经上传”。要求凭证且附件集合为空时，missingFields 含 proof，但原因和数量仍可成立，state 仍为 OK。规格把这种情况写成“提示”，把无法确定商品或数量写成“追问”。",
+  "proofRule": "凭证必填且可信附件为空时返回NEEDS_INPUT，保留已确定的原因和数量，missingFields含proof；文本声称上传不作凭证。",
   "missingFieldNames": {
     "proof": "需要凭证但可信附件为空",
     "quantity": "数量矛盾、缺失或越界",
@@ -90,5 +90,6 @@
     "原因必须属于 17、18、19。",
     "description 可以改写，本集不把润色文本当精确匹配，expected.description 为 null。",
     "evidence 的值必须是问题文本的连续片段。"
-  ]
+  ],
+  "currentRuleRevision": "2026-11-07；公开回归标签对齐，不表示独立人工核对完成"
 }

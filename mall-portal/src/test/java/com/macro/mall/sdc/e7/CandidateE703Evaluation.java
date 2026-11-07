@@ -2,6 +2,7 @@ package com.macro.mall.sdc.e7;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.macro.mall.portal.ai.returns.ReturnMaterialService;
 import com.macro.mall.portal.ai.returns.ExistingReturnMaterialService;
 import com.macro.mall.portal.ai.returns.LlmReturnMaterialService;
 import com.macro.mall.portal.ai.returns.ReturnMaterialService.ItemContext;
@@ -38,24 +39,20 @@ public final class CandidateE703Evaluation {
                 existingNormalReliable, safetyViolation);
     }
 
-    public static void main(String[] args) throws Exception {
-        if (args.length != 2) throw new IllegalArgumentException("Usage: CandidateE703Evaluation acceptance.json report.json");
-        Path acceptance = Path.of(args[0]);
-        if (!Files.isRegularFile(acceptance.resolveSibling("facts.json"))) {
-            throw new IllegalStateException("缺少facts.json，不能把开发用例当作独立验收");
-        }
-        ObjectMapper json = new ObjectMapper();
-        JsonNode cases = rootCases(json.readTree(Files.readString(acceptance)));
-        var existing = new ExistingReturnMaterialService(EvaluationSupport.unavailable(OmsPortalOrderReturnApplyService.class));
-        var calls = new int[] {0};
-        var outputs = new ArrayList<String>();
-        var failure = new String[] {""};
-        var llm = new LlmReturnMaterialService(existing, EvaluationSupport.cursorClient(calls, outputs, failure));
+    // 本人只需替换这里的两个构造；主运行与历史回放共用，判分不依赖具体实现。
+    static ReturnMaterialService studentExisting() { return new ExistingReturnMaterialService(EvaluationSupport.unavailable(OmsPortalOrderReturnApplyService.class)); }
+    static ReturnMaterialService studentLlm(ReturnMaterialService existing, com.macro.mall.portal.llm.LlmClient client) {
+        return new LlmReturnMaterialService((ExistingReturnMaterialService) existing, client);
+    }
+
+    public record ComparisonRun(List<Map<String,Object>> rows, int normalCases, int normalPasses, int boundaryCases, int boundaryPasses, int existingPasses, boolean safetyViolation, boolean stopped) {}
+
+    public static ComparisonRun compareCases(JsonNode cases, ReturnMaterialService existing, ReturnMaterialService llm,
+                                             List<String> outputs, int[] calls, String[] failure) {
         List<Map<String, Object>> rows = new ArrayList<>();
         int normalCases = 0, normalPasses = 0, boundaryCases = 0, boundaryPasses = 0, existingCases = 0, existingPasses = 0;
         boolean safetyViolation = false;
         boolean stopped = false;
-        long wallStart = System.nanoTime();
         for (JsonNode item : cases) {
             if (stopped) break;
             JsonNode input = item.path("input");
@@ -63,7 +60,7 @@ public final class CandidateE703Evaluation {
             JsonNode llmInput = input.has("llm") ? input.get("llm") : input;
             JsonNode form = input.has("form") ? input.get("form") : input;
             JsonNode contextNode = input.has("serviceContext") ? input.get("serviceContext") : input.path("context");
-            ItemContext fixture = contextNode != null && contextNode.isObject() ? contextOf(contextNode) : null;
+            ItemContext fixture = contextNode != null && contextNode.isObject() ? contextOf(contextNode, llmInput) : null;
             Set<String> missing = new LinkedHashSet<>();
             expected.path("missingFields").forEach(node -> missing.add(node.asText()));
             Map<String, String> expectedEvidence = new LinkedHashMap<>();
@@ -83,18 +80,21 @@ public final class CandidateE703Evaluation {
                 try {
                     actual = "llm".equals(implementation)
                             ? llm.suggest(new Request(fixture, question, null, null))
-                            : existing.suggest(new Request(fixture, null, nullableLong(form, "reasonId"), integer(form, "quantity")));
+                            : existing.suggest(new Request(fixture, text(form,"text"), nullableLong(form, "reasonId"), integer(form, "quantity")));
                 } catch (RuntimeException ex) {
                     actual = new Result(com.macro.mall.portal.ai.returns.ReturnMaterialService.State.UNAVAILABLE, null, null, null, Map.of(), Set.of());
                     error = EvaluationSupport.redact(ex.getClass().getSimpleName() + ": " + ex.getMessage());
                 }
                 if (error.isBlank() && !failure[0].isBlank()) error = failure[0];
                 boolean transport = "llm".equals(implementation) && EvaluationSupport.infrastructureFailure(error);
-                boolean evidenceOk = expectedEvidence.equals(actual.evidence());
-                boolean quotesOk = actual.evidence().values().stream().allMatch(quote -> question != null && question.contains(quote));
-                boolean passed = !transport && matches(expected.path("state").asText(), nullableLong(expected, "reasonId"),
-                        integer(expected, "quantity"), missing, actual) && evidenceOk && (actual.evidence().isEmpty() || quotesOk);
-                if (!transport && normal && "llm".equals(implementation)) { normalCases++; if (passed) normalPasses++; }
+                boolean structural = matches(expected.path("state").asText(), nullableLong(expected,"reasonId"),integer(expected,"quantity"),missing,actual);
+                boolean isModel="llm".equals(implementation);
+                boolean quotesOk=actual.evidence().values().stream().allMatch(quote -> quote!=null && !quote.isBlank() && question!=null && question.contains(quote));
+                boolean evidenceShape=isModel ? expectedEvidence.keySet().equals(actual.evidence().keySet()) : actual.evidence().isEmpty();
+                boolean pending=isModel && structural && evidenceShape && quotesOk && !expectedEvidence.equals(actual.evidence());
+                boolean scored=!transport && !pending;
+                boolean passed=scored && structural && evidenceShape && (!isModel || quotesOk);
+                if (scored && normal && "llm".equals(implementation)) { normalCases++; if (passed) normalPasses++; }
                 if (normal && "existing".equals(implementation)) { existingCases++; if (passed) existingPasses++; }
                 if (boundary && "llm".equals(implementation)) llmBoundary = passed;
                 boolean fabricated = actual.evidence().values().stream().anyMatch(quote -> question == null || !question.contains(quote));
@@ -105,9 +105,11 @@ public final class CandidateE703Evaluation {
                 row.put("kind", kind);
                 row.put("implementation", implementation);
                 row.put("passed", passed);
-                row.put("scored", !transport);
+                row.put("scored", scored);
+                row.put("detail", pending ? "合法异片段待人工核对" : "");
                 row.put("errorCategory", transport ? "传输未完成" : "");
                 row.put("actualState", actual.state().name());
+                row.put("actual", actual);
                 row.put("elapsedMillis", (System.nanoTime() - started) / 1_000_000);
                 row.put("modelCalls", calls[0] - before);
                 row.put("error", error);
@@ -120,6 +122,27 @@ public final class CandidateE703Evaluation {
             }
             if (boundary) { boundaryCases++; if (llmBoundary) boundaryPasses++; }
         }
+        return new ComparisonRun(rows,normalCases,normalPasses,boundaryCases,boundaryPasses,existingPasses,safetyViolation,stopped);
+    }
+
+    public static void main(String[] args) throws Exception {
+        if (args.length != 2) throw new IllegalArgumentException("Usage: CandidateE703Evaluation acceptance.json report.json");
+        Path acceptance = Path.of(args[0]);
+        if (!Files.isRegularFile(acceptance.resolveSibling("facts.json"))) {
+            throw new IllegalStateException("缺少facts.json，不能把开发用例当作独立验收");
+        }
+        ObjectMapper json = new ObjectMapper();
+        JsonNode cases = rootCases(json.readTree(Files.readString(acceptance)));
+        var existing = studentExisting();
+        var calls = new int[] {0};
+        var outputs = new ArrayList<String>();
+        var failure = new String[] {""};
+        var llm = studentLlm(existing, EvaluationSupport.cursorClient(calls, outputs, failure));
+        long wallStart = System.nanoTime();
+        ComparisonRun run = compareCases(cases, existing, llm, outputs, calls, failure);
+        List<Map<String,Object>> rows=run.rows();
+        int normalCases=run.normalCases(), normalPasses=run.normalPasses(), boundaryCases=run.boundaryCases(), boundaryPasses=run.boundaryPasses(), existingPasses=run.existingPasses();
+        boolean safetyViolation=run.safetyViolation(), stopped=run.stopped();
         EvaluationSupport.appendNotRun(rows, cases);
         boolean boundariesHeld = boundaryCases == 12 && boundaryPasses == 12;
         boolean ordinary = existingPasses == 20 && !safetyViolation;
@@ -137,13 +160,17 @@ public final class CandidateE703Evaluation {
         return root.isArray() ? root : root.path("cases");
     }
 
-    private static ItemContext contextOf(JsonNode node) {
+    private static ItemContext contextOf(JsonNode node, JsonNode llmInput) {
         Set<Long> reasons = new LinkedHashSet<>();
         node.path("allowedReasonIds").forEach(item -> reasons.add(item.asLong()));
         Set<String> proofs = new LinkedHashSet<>();
         node.path("uploadedProofIds").forEach(item -> proofs.add(item.asText()));
+        Map<Long,String> names = new LinkedHashMap<>();
+        node.path("allowedReasons").fields().forEachRemaining(entry -> names.put(Long.valueOf(entry.getKey()),entry.getValue().asText()));
+        llmInput.path("allowedReasons").forEach(reason -> names.put(reason.path("id").asLong(),reason.path("name").asText()));
+        for (Long id : reasons) if (!names.containsKey(id)) throw new IllegalStateException("题集缺少原因名称: "+id);
         return new ItemContext(node.path("orderId").asLong(), node.path("itemId").asLong(), node.path("maxQuantity").asInt(),
-                reasons, node.path("proofRequired").asBoolean(false), proofs);
+                names, text(llmInput,"productClue"), node.path("proofRequired").asBoolean(false), proofs);
     }
 
     private static Long nullableLong(JsonNode node, String field) {
