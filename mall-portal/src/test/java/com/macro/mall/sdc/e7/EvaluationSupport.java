@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
 /** 评测器辅助。只做脱敏、泄漏检查、报告和教学库预检，不判断语义对错。 */
 final class EvaluationSupport {
     static final String HARNESS_NOTE = "验收文件把模型输入放在 input.llm 或 input.text，普通输入放在 input.form。"
-            + "本次只改评测器入参组装：expected、kind 和标准答案不进入模型。这不是盲测调参，也没有改产品提示词。";
+            + "expected、kind 和标准答案不进入模型。公开回归不是未见题；修复范围、版本及实际验证见本题Issue与运行证据。";
     static final String NO_USAGE = "无数据";
     static final String USAGE_HIDDEN = "适配器未暴露";
     static final String NOT_HUMAN = "独立人工核对尚未进行";
