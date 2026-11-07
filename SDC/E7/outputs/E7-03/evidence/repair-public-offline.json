@@ -980,7 +980,7 @@
       "quantity" : null,
       "description" : "",
       "evidence" : { },
-      "missingFields" : [ "proof", "quantity" ]
+      "missingFields" : [ "quantity", "proof" ]
     },
     "elapsedMillis" : 0,
     "modelCalls" : 0,
@@ -1164,7 +1164,7 @@
       "quantity" : null,
       "description" : "",
       "evidence" : { },
-      "missingFields" : [ "proof", "quantity" ]
+      "missingFields" : [ "quantity", "proof" ]
     },
     "elapsedMillis" : 0,
     "modelCalls" : 0,
@@ -1256,7 +1256,7 @@
       "quantity" : null,
       "description" : "",
       "evidence" : { },
-      "missingFields" : [ "proof", "quantity" ]
+      "missingFields" : [ "quantity", "proof" ]
     },
     "elapsedMillis" : 0,
     "modelCalls" : 0,
@@ -1472,8 +1472,8 @@
     "modelOutput" : [ ],
     "cost" : "无数据"
   } ],
-  "decision" : "未完成",
-  "humanReview" : "未进行独立人工核对",
+  "evidenceType" : "public offline ordinary regression; model unavailable, not quality evidence",
   "modelCalls" : 0,
-  "evidenceType" : "public offline ordinary regression; model unavailable, not quality evidence"
+  "humanReview" : "未进行独立人工核对",
+  "decision" : "未完成"
 }

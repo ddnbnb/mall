@@ -155,5 +155,17 @@ class SDCE703Test {
         assertNull(result.quantity()); assertEquals(Set.of("quantity","proof"),result.missingFields());
         verifyNoInteractions(writer);
     }
+    @Test
+    void blankEvidenceCannotTurnUnprovenFieldsIntoOk() {
+        var writer=mock(OmsPortalOrderReturnApplyService.class);
+        var context=new ItemContext(50,80,2,java.util.Map.of(7L,"质量"),"运动鞋",false,Set.of());
+        for(String quote:List.of(""," ")) {
+            var result=new ExistingReturnMaterialService(writer).accept(context,"鞋底开胶 退1双",7L,1,"",
+                java.util.Map.of("reasonId",quote,"quantity",quote),true);
+            assertEquals(State.NEEDS_INPUT,result.state()); assertNull(result.reasonId()); assertNull(result.quantity());
+            assertTrue(result.evidence().isEmpty()); assertEquals(Set.of("reasonId","quantity"),result.missingFields());
+        }
+        verifyNoInteractions(writer);
+    }
 
 }

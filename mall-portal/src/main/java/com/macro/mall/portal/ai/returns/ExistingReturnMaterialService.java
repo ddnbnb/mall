@@ -44,14 +44,14 @@ public class ExistingReturnMaterialService implements ReturnMaterialService {
         Map<String, String> kept = new LinkedHashMap<>();
         if (requireEvidence) {
             String reasonQuote = evidence.get("reasonId");
-            if (reason == null || reasonQuote == null || !body.contains(reasonQuote)) {
+            if (reason == null || reasonQuote == null || reasonQuote.isBlank() || !body.contains(reasonQuote)) {
                 reason = null;
             } else {
                 kept.put("reasonId", reasonQuote);
             }
             if (count != null) {
                 String quantityQuote = evidence.get("quantity");
-                if (quantityQuote == null || !body.contains(quantityQuote)) {
+                if (quantityQuote == null || quantityQuote.isBlank() || !body.contains(quantityQuote)) {
                     count = null;
                 } else {
                     kept.put("quantity", quantityQuote);
