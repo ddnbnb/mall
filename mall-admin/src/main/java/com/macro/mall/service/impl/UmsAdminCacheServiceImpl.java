@@ -3,13 +3,13 @@ package com.macro.mall.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.macro.mall.common.service.RedisService;
 import com.macro.mall.dao.UmsAdminRoleRelationDao;
+import com.macro.mall.mapper.UmsAdminMapper;
 import com.macro.mall.mapper.UmsAdminRoleRelationMapper;
 import com.macro.mall.model.UmsAdmin;
 import com.macro.mall.model.UmsAdminRoleRelation;
 import com.macro.mall.model.UmsAdminRoleRelationExample;
 import com.macro.mall.model.UmsResource;
 import com.macro.mall.service.UmsAdminCacheService;
-import com.macro.mall.service.UmsAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Service
 public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
     @Autowired
-    private UmsAdminService adminService;
+    private UmsAdminMapper adminMapper;
     @Autowired
     private RedisService redisService;
     @Autowired
@@ -42,7 +42,7 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
 
     @Override
     public void delAdmin(Long adminId) {
-        UmsAdmin admin = adminService.getItem(adminId);
+        UmsAdmin admin = adminMapper.selectByPrimaryKey(adminId);
         if (admin != null) {
             String key = REDIS_DATABASE + ":" + REDIS_KEY_ADMIN + ":" + admin.getUsername();
             redisService.del(key);

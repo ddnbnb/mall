@@ -14,7 +14,6 @@ import com.macro.mall.mapper.UmsAdminMapper;
 import com.macro.mall.mapper.UmsAdminRoleRelationMapper;
 import com.macro.mall.model.*;
 import com.macro.mall.security.util.JwtTokenUtil;
-import com.macro.mall.security.util.SpringUtil;
 import com.macro.mall.service.UmsAdminCacheService;
 import com.macro.mall.service.UmsAdminService;
 import org.slf4j.Logger;
@@ -44,6 +43,7 @@ import java.util.List;
 @Service
 public class UmsAdminServiceImpl implements UmsAdminService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UmsAdminServiceImpl.class);
+    private final UmsAdminCacheService cacheService;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
@@ -57,10 +57,15 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Autowired
     private UmsAdminLoginLogMapper loginLogMapper;
 
+    @Autowired
+    public UmsAdminServiceImpl(UmsAdminCacheService cacheService) {
+        this.cacheService = cacheService;
+    }
+
     @Override
     public UmsAdmin getAdminByUsername(String username) {
         //先从缓存中获取数据
-        UmsAdmin admin = getCacheService().getAdmin(username);
+        UmsAdmin admin = cacheService.getAdmin(username);
         if (admin != null) return admin;
         //缓存中没有从数据库中获取
         UmsAdminExample example = new UmsAdminExample();
@@ -69,7 +74,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         if (adminList != null && adminList.size() > 0) {
             admin = adminList.get(0);
             //将数据库中的数据存入缓存中
-            getCacheService().setAdmin(admin);
+            cacheService.setAdmin(admin);
             return admin;
         }
         return null;
@@ -183,15 +188,15 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             }
         }
         int count = adminMapper.updateByPrimaryKeySelective(admin);
-        getCacheService().delAdmin(id);
+        cacheService.delAdmin(id);
         return count;
     }
 
     @Override
     public int delete(Long id) {
         int count = adminMapper.deleteByPrimaryKey(id);
-        getCacheService().delAdmin(id);
-        getCacheService().delResourceList(id);
+        cacheService.delAdmin(id);
+        cacheService.delResourceList(id);
         return count;
     }
 
@@ -213,7 +218,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             }
             adminRoleRelationDao.insertList(list);
         }
-        getCacheService().delResourceList(adminId);
+        cacheService.delResourceList(adminId);
         return count;
     }
 
@@ -225,7 +230,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Override
     public List<UmsResource> getResourceList(Long adminId) {
         //先从缓存中获取数据
-        List<UmsResource> resourceList = getCacheService().getResourceList(adminId);
+        List<UmsResource> resourceList = cacheService.getResourceList(adminId);
         if(CollUtil.isNotEmpty(resourceList)){
             return  resourceList;
         }
@@ -233,7 +238,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         resourceList = adminRoleRelationDao.getResourceList(adminId);
         if(CollUtil.isNotEmpty(resourceList)){
             //将数据库中的数据存入缓存中
-            getCacheService().setResourceList(adminId,resourceList);
+            cacheService.setResourceList(adminId,resourceList);
         }
         return resourceList;
     }
@@ -257,7 +262,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         }
         umsAdmin.setPassword(passwordEncoder.encode(param.getNewPassword()));
         adminMapper.updateByPrimaryKey(umsAdmin);
-        getCacheService().delAdmin(umsAdmin.getId());
+        cacheService.delAdmin(umsAdmin.getId());
         return 1;
     }
 
@@ -273,15 +278,10 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     }
 
     @Override
-    public UmsAdminCacheService getCacheService() {
-        return SpringUtil.getBean(UmsAdminCacheService.class);
-    }
-
-    @Override
     public void logout(String username) {
         //清空缓存中的用户相关数据
-        UmsAdmin admin = getCacheService().getAdmin(username);
-        getCacheService().delAdmin(admin.getId());
-        getCacheService().delResourceList(admin.getId());
+        UmsAdmin admin = cacheService.getAdmin(username);
+        cacheService.delAdmin(admin.getId());
+        cacheService.delResourceList(admin.getId());
     }
 }
